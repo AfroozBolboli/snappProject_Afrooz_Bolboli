@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admin\AdminRestaurantController;
+use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\adminOnly;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\customerOnly;
-use App\Http\Controllers\SellerController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +41,7 @@ Route::group(['middleware' => 'auth'], function(){
         'as' => 'admin.' //just for route names in navigation as admin.task.index
     ], function(){
         Route::get('/adminEx', [adminOnly::class, 'index']);
-        //Route::get('/', somecontroller)->name('tasks.index)
+        Route::resource('/restaurantCategory', RestaurantCategoryController::class);
     });
 
     Route::group([
@@ -50,7 +49,7 @@ Route::group(['middleware' => 'auth'], function(){
         'middleware' => 'isSeller',
         'as' => 'seller.'
     ], function(){
-        Route::get('/dashboard', [SellerController::class, 'index']);
+        // Route::get('/dashboard', [SellerController::class, 'index']);
         //Route::get('/', somecontroller)->name('tasks.index)
     });
 
