@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminBannerController;
+use App\Http\Controllers\admin\AdminFoodController;
 use App\Http\Controllers\admin\AdminRestaurantController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\adminOnly;
@@ -40,8 +42,9 @@ Route::group(['middleware' => 'auth'], function(){
         'middleware' => 'isAdmin',
         'as' => 'admin.' //just for route names in navigation as admin.task.index
     ], function(){
-        Route::get('/adminEx', [adminOnly::class, 'index']);
         Route::resource('/restaurantCategory', RestaurantCategoryController::class);
+        Route::resource('/foodCategory', AdminFoodController::class);
+        Route::resource('/banner', AdminBannerController::class);
     });
 
     Route::group([
@@ -59,7 +62,6 @@ Route::group(['middleware' => 'auth'], function(){
         'as' => 'customer.'
     ], function(){
         Route::get('customerEx', [customerOnly::class, 'index']);
-        //Route::get('/', somecontroller)->name('tasks.index)
     });
 });
 

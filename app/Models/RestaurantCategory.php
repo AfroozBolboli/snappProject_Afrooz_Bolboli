@@ -10,4 +10,11 @@ class RestaurantCategory extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'image_path'];
+
+    public function foodCategorys()
+    {
+        return $this->hasMany(FoodCategory::class);
+    }
+
+
 }

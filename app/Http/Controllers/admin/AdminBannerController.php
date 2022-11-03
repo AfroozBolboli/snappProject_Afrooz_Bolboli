@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\FoodCategory;
-use App\Models\RestaurantCategory;
+use App\Models\Banner;
 use Illuminate\Http\Request;
-use Throwable;
 
-class AdminFoodController extends Controller
+class AdminBannerController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $foods = FoodCategory::all();
-        return view('admin/foodCategory/index')->with('foods', $foods);
+        $banners = Banner::all();
+        return view('admin/banner/index')->with('banners', $banners);
     }
 
     /**
@@ -28,7 +26,7 @@ class AdminFoodController extends Controller
      */
     public function create()
     {
-        return view('admin/foodCategory/create');
+        return view('admin/banner/create');
     }
 
     /**
@@ -41,29 +39,19 @@ class AdminFoodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'restaurantCategory' => 'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048',
         ]); 
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         
         $request->image->move(public_path('images'), $newImageName);
-        try
-        {
-            $restaurantCategory = RestaurantCategory::where('title',$request->restaurantCategory)->first()->id;
 
-            $food = FoodCategory::create([
-                'title' => $request->input('title'),
-                'restaurantCategory_id' => $restaurantCategory,
-                'image_path' => $newImageName
-            ]);
-        }catch (Throwable $e) {
-            report($e);
-            $error = 'این دسته بندی رستوران موجود نمی باشد';
-            return view('admin/foodCategory/create')->with('error', $error);
-        }
+        $banner = Banner::create([
+            'title' => $request->input('title'),
+            'image_path' => $newImageName
+        ]);
 
-        return redirect('admin/foodCategory');
+        return redirect('admin/banner');
     }
 
     /**
@@ -74,8 +62,8 @@ class AdminFoodController extends Controller
      */
     public function show($id)
     {
-        $food = FoodCategory::find($id);
-        return view('admin/foodCategory/show')->with('food', $food);
+        $banner = Banner::find($id);
+        return view('admin/banner/show')->with('banner', $banner);
     }
 
     /**
@@ -86,8 +74,8 @@ class AdminFoodController extends Controller
      */
     public function edit($id)
     {
-        $food = FoodCategory::find($id);
-        return view('admin/foodCategory/edit')->with('food', $food);
+        $banner = Banner::find($id);
+        return view('admin/banner/edit')->with('banner', $banner);
     }
 
     /**
@@ -104,17 +92,16 @@ class AdminFoodController extends Controller
             'image' => 'required|mimes:jpg,png,jpeg|max:5048',
         ]); 
 
-
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
 
-        $food = FoodCategory::where('id', $id)
+        $banner = Banner::where('id', $id)
             ->update([
                 'title' => $request->input('title'),
                 'image_path' => $newImageName,
         ]);
 
-        return redirect('admin/foodCategory');
+        return redirect('admin/banner');
     }
 
     /**
@@ -125,8 +112,8 @@ class AdminFoodController extends Controller
      */
     public function destroy($id)
     {
-        $food = FoodCategory::find($id);
-        $food->delete();
-        return redirect('admin/foodCategory');
+        $banner = Banner::find($id);
+        $banner->delete();
+        return redirect('admin/banner');
     }
 }
