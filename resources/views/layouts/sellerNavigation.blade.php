@@ -12,23 +12,23 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-20 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.food.index')" :active="request()->routeIs('dashboard')">
                         {{ __('غذاهای ساخته شده') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
                         {{ __('گزارش فروش') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
                         {{ __('تنظیمات رستوران') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
                         {{ __('نظرات') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
                         {{ __('گزارشات') }}
                     </x-nav-link>
                 </div>

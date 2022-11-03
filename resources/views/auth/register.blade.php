@@ -40,8 +40,8 @@
             <div class="mt-4">
                 <x-input-label class="text-white text-lg" for="role" :value="__('نقش')" />
                 <select name="role" class="block mt-1 w-full text-right">
-                    <option value="2">خریدار</option>
-                    <option value="3">فروشنده</option>
+                    <option value="2">فروشنده</option>
+                    <option value="3">خریدار</option>
                 </select>
                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
             </div>

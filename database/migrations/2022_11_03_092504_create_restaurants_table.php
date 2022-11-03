@@ -16,13 +16,18 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('phone');
+            $table->bigInteger('phone')->nullable();
             $table->longText('address');
             $table->integer('accountNumber');
-            $table->string('restaurantPicture');
-            $table->float('shippingCost');
+            $table->string('restaurantPicture')->nullable();
+            $table->float('shippingCost')->nullable();
+            $table->unsignedInteger('owner_id')->nullable();
+            $table->foreign('owner_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->boolean('status')->default(0); //if the shop is entirely closed or opem
-            $table->string('category');
+            $table->string('categories');
             // $table->string('workingDay');
             // $table->time('openingTime');
             // $table->time('closingTime');
