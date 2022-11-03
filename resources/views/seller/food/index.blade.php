@@ -17,7 +17,7 @@
         <div class="w-5/6 py-10">
             @foreach($foods as $food)
                 <div class="m-auto py-6 divide-black">
-                    <div class="float-right ">
+                    <div class="float-right">
                         <a 
                             class="pb-2 italic text-green-600"
                             href="food/{{$food->id}}/edit">ویرایش &rarr;</a>
