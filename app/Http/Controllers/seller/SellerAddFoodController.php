@@ -22,7 +22,7 @@ class SellerAddFoodController extends Controller
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
         if(!empty($restaurant_id))
             $restaurant_id = $restaurant_id->id;
-        $foods = Food::where('restaurant_id', $restaurant_id)->get();
+        $foods = Food::where('restaurant_id', $restaurant_id)->paginate(2);
         return view('seller.food.index')->with('foods', $foods);
     }
 
@@ -181,11 +181,6 @@ class SellerAddFoodController extends Controller
                       ->get();
         }
 
-        $categories =  Food::where('restaurant_id', $restaurant_id)->get('category');
-
-        return view('seller.food.index',[
-            'foods' => $foods,
-            'categories' => $categories
-        ]);
+        return view('seller.food.index')->with('foods', $foods);
     }
 }

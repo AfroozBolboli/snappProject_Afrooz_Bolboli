@@ -80,6 +80,10 @@
             @endforeach
         </div>
 
+        
+    {{$foods->links()}}
+
+
     </div>
     
 </x-SellerApp-layout>
