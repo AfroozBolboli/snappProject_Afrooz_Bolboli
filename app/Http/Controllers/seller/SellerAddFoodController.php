@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
 use App\Models\Restaurant;
@@ -33,8 +34,13 @@ class SellerAddFoodController extends Controller
      */
     public function create()
     {
+        $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
         $categories = FoodCategory::all();
-        return view('seller.food.create')->with('categories',$categories);
+        $discounts = Discount::where('restaurant_name', $restaurant_name)->get();
+        return view('seller.food.create',[
+            'categories' => $categories,
+            'discounts' => $discounts
+        ]);
     }
 
     /**
@@ -95,11 +101,14 @@ class SellerAddFoodController extends Controller
      */
     public function edit($id)
     {
+        $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
+        $discounts = Discount::where('restaurant_name', $restaurant_name)->get();
         $food = Food::find($id);        
         $categories = FoodCategory::all();
         return view('seller/food/edit',[
             'food' => $food,
-            'categories' => $categories
+            'categories' => $categories,
+            'discounts' => $discounts
         ]);
     }
 

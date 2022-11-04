@@ -23,6 +23,13 @@
                             name="name" 
                             placeholder="اسم غذا">
 
+                        <label>تخفیف</label><br>
+                        <select name="discount">
+                            @foreach($discounts as $discount)
+                                <option value="{{$discount->title}}">{{$discount->price}}قیمت  {{$discount->title}}کد </option>
+                            @endforeach
+                        </select>
+                        
                         <div class="flex justify-center space-x-5 mb-5 ">  
                             @foreach($categories as $category)
                             <div>

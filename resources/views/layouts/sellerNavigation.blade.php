@@ -20,7 +20,7 @@
                         {{ __('گزارش فروش') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.setting.index')" :active="request()->routeIs('dashboard')">
                         {{ __('تنظیمات رستوران') }}
                     </x-nav-link>
 

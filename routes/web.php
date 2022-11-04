@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminFoodController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
+use App\Http\Controllers\seller\SellerSettingController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/completeInfo', CompleteInfoController::class);
         Route::resource('/food', SellerAddFoodController::class);
         Route::post('/food/filter', [SellerAddFoodController::class, 'filter']);
-
+        Route::resource('/setting', SellerSettingController::class);
     });
 
     Route::group([

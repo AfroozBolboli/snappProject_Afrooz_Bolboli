@@ -1,7 +1,7 @@
 <x-SellerApp-layout>
     <x-slot name="header">
         <h2 class="text-3xl bold text-white leading-tight text-center">
-            {{ __('بنرهای غذا ') }}
+            {{ __(' غذا ها ') }}
         </h2>
     </x-slot>
     <div class="flex justify-center">
