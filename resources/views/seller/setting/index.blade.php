@@ -45,6 +45,13 @@
                                 @endif
                             </span><br>
                             <span>
+                                 ساعت کاری : <br>{{$restaurant->workingHours}} 
+                                 
+                                @if(empty($restaurant->workingHours)) 
+                                    تعیین نشده
+                                @endif                            
+                            </span><br>
+                            <span>
                                 وضع رستوران: 
                                 @if($restaurant->status)
                                     باز

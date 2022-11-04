@@ -101,6 +101,7 @@ class SellerSettingController extends Controller
                 'phone' => $request->input('phone'),
                 'address' => $request->input('address'),
                 'accountNumber' => $request->input('accountNumber'),
+                'workingHours' => $request->input('workingHours'),
                 'restaurantPicture' => $newImageName,
                 'shippingCost' => $request->input('shippingCost'),
                 'status' => $request->input('status'),

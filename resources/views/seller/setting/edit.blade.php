@@ -50,6 +50,13 @@
                             name="address" 
                             value="{{$restaurant->address}}"
                             placeholder="آدرس رستوران">
+                        
+                        <input
+                            type="text"
+                            class="block shadow-5xl mb-3 p-2 w-80 italic text-right placeholder-pink-400"
+                            name="workingHours" 
+                            value="{{$restaurant->workingHours}}"
+                            placeholder="ساعت کاری رستوران">
 
                         <input
                             type="number"
