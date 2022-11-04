@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('phone')->nullable();
             $table->longText('address');
-            $table->integer('accountNumber');
+            $table->bigInteger('accountNumber');
             $table->string('restaurantPicture')->nullable();
             $table->float('shippingCost')->nullable();
             $table->unsignedInteger('owner_id')->nullable();

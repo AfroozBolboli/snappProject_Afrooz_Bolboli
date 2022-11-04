@@ -29,7 +29,7 @@
                     </div>
                     <div class=" text-center flex justify-center space-x-10 space-y-16 " >
                         <br><span class="text-pink-600 font-bold text-xl italic ">
-                            اسم تخفیف: {{$discount->title}}
+                            کد تخفیف: {{$discount->title}}
                         </span>
                         <span class="text-pink-600 font-bold text-xl italic ">
                             اسم رستوران: {{$discount->restaurant_name}}

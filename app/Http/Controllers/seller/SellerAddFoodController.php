@@ -58,7 +58,6 @@ class SellerAddFoodController extends Controller
             $request->image->move(public_path('images'), $newImageName);
         }
 
-            $foodCategory = FoodCategory::where('title',$request->category)->first()->id;
             $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
             $restaurant_id = $restaurant_id->id;
             if($request->input('ingredient'))
@@ -69,7 +68,7 @@ class SellerAddFoodController extends Controller
                 'name' => $request->input('name'),
                 'ingredient' => $ingredient,
                 'price' => $request->input('price'),
-                'category' => $foodCategory,
+                'category' => $request->input('category'),
                 'image_path' => $newImageName,
                 'restaurant_id' => $restaurant_id
             ]);
@@ -85,8 +84,7 @@ class SellerAddFoodController extends Controller
      */
     public function show($id)
     {
-        $food = Food::find($id);
-        return view('seller/food/show')->with('food', $food);
+
     }
 
     /**
@@ -158,5 +156,36 @@ class SellerAddFoodController extends Controller
         $food = Food::find($id);
         $food->delete();
         return redirect('seller/food');
+    }
+
+    public function filter(Request $request){
+        $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
+        if(!empty($restaurant_id))
+            $restaurant_id = $restaurant_id->id;
+            
+        if(request('foodFilter'))
+        {
+            $foods = Food::where('restaurant_id', $restaurant_id)
+                    ->where('name', 'like', '%'.request('foodFilter').'%')
+                    ->get();
+        }
+        elseif(request('categoryFilter'))
+        {
+            $foods =  Food::where('restaurant_id', $restaurant_id)
+                    ->where('category', request('categoryFilter'))
+                    ->get();
+        }
+        else
+        {
+            $foods =  Food::where('restaurant_id', $restaurant_id)
+                      ->get();
+        }
+
+        $categories =  Food::where('restaurant_id', $restaurant_id)->get('category');
+
+        return view('seller.food.index',[
+            'foods' => $foods,
+            'categories' => $categories
+        ]);
     }
 }

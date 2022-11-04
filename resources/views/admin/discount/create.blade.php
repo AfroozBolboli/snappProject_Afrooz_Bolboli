@@ -14,7 +14,7 @@
                 @endif
             </div>
 
-            <div class="pt-10">
+            <div class="flex justify-center pt-10">
                 <form action="/admin/discount" method="post">
                     @csrf
                     <div class="block text-center">
@@ -49,7 +49,7 @@
                             type="datetime-local"
                             class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400"
                             name="endingDate" 
-                            placeholder="روز پایان تخفیف"><br>
+                            placeholder="روز پایان تخفیف">
                         
                         <button type="submit" class="bg-pink-600 block shadow-5xl mb-10 p-2 w-80 font-bold text-white">
                             ثبت 

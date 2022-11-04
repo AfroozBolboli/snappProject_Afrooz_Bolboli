@@ -4,6 +4,29 @@
             {{ __('بنرهای غذا ') }}
         </h2>
     </x-slot>
+    <div class="flex justify-center">
+        <form action="{{url('seller/food/filter')}}" method="post">
+            @csrf
+            <div class=" m-4 mx-auto form-control text-right">
+                <label>فیلتر نام غذا</label><br>
+                <input type="search" name = 'foodFilter' class="m-3">
+                <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
+                    جست و جو 
+                </button>
+            </div>
+        </form>
+
+        <form action="{{url('seller/food/filter')}}" method="post">
+            @csrf
+            <div class=" m-4 mx-10 form-control text-right">
+                <label>فیلتر دسته بندی غذا</label><br>
+                <input type="search" name = 'categoryFilter' class="m-3">
+                <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
+                    جست و جو 
+                </button>
+            </div>
+        </form>
+    </div>
 
     <div class="m-auto w-4/5 py-12">
     

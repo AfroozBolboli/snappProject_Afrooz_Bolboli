@@ -27,13 +27,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $role = auth()->user()->role;
 
-    if($role == 1)
+    if($role === 1)
         return view('admin.dashboard');
-    elseif($role == 2)
+    elseif($role === 2)
     {
         return view('seller/infoPage');
     }
-    elseif($role == 3)
+    elseif($role === 3)
         return view('customer.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::resource('/completeInfo', CompleteInfoController::class);
         Route::resource('/food', SellerAddFoodController::class);
+        Route::post('/food/filter', [SellerAddFoodController::class, 'filter']);
 
     });
 
