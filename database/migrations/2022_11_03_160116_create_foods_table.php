@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price');
             $table->string('image_path');
             $table->string('category');
-            $table->unsignedInteger('restaurant_id');
+            $table->unsignedInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')
                 ->references('id')
                 ->on('restaurants')
