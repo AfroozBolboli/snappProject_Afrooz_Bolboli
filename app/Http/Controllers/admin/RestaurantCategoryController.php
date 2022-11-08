@@ -93,7 +93,6 @@ class RestaurantCategoryController extends Controller
             'image' => 'required|mimes:jpg,png,jpeg|max:5048',
         ]); 
 
-
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
 

@@ -36,7 +36,7 @@ class CompleteInfoController extends Controller
             'accountNumber' => 'required',
         ]); 
 
-        $categories = implode("-", $request->categories[]);
+        $categories = implode("-", $request->categories);
         $owner_id = auth()->user()->id;
         $info = Restaurant::create([
             'name' => $request->input('name'),

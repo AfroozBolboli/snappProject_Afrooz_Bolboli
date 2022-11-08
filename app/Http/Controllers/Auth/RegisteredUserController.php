@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        // dd($request->role);
         return redirect(RouteServiceProvider::HOME);
     }
 }
