@@ -34,6 +34,7 @@ Route::get('/dashboard', function () {
     {
         return view('seller/infoPage');
     }
+    
     elseif($role == 3)
         return view('customer.dashboard');
 
