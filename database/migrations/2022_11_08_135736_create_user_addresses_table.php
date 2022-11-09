@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('foods', function (Blueprint $table) {
+        Schema::create('user_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('ingredient');
-            $table->float('price');
-            $table->string('image_path');
-            $table->string('category');
-            $table->unsignedInteger('restaurant_id')->nullable();
-            $table->foreign('restaurant_id')
+            $table->string('title');
+            $table->longText('address');
+            $table->float('latitude');
+            $table->float('longitude');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('restaurants')
+                ->on('users')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,6 +36,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food');
+        Schema::table('user_addresses', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };
