@@ -34,12 +34,8 @@ Route::get('/dashboard', function () {
     {
         return view('seller/infoPage');
     }
-<<<<<<< HEAD
     elseif($role === 3)
-=======
-    
-    elseif($role == 3)
->>>>>>> Develop
+
         return view('customer.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
