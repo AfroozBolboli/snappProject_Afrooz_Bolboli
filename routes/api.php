@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::resource('/userAddress', CustomerAddressController::class);
     Route::patch('/userAddress/{id}', [CustomerAddressController::class, 'update']);
     Route::resource('/restaurants', RestaurantApiController::class);
+    Route::get('/restaurants/{restaurant_id}/foods', [RestaurantApiController::class, 'foods']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
