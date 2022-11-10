@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AdminBannerRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 
@@ -35,13 +36,9 @@ class AdminBannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminBannerRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
-
+        $request->validated();
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         
         $request->image->move(public_path('images'), $newImageName);
@@ -85,17 +82,14 @@ class AdminBannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminBannerRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
+        $request->validated();
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
 
-        $banner = Banner::where('id', $id)
+        $banner = Banner::find($id)
             ->update([
                 'title' => $request->input('title'),
                 'image_path' => $newImageName,

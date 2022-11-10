@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\seller\CompleteInfoRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
@@ -27,14 +28,9 @@ class CompleteInfoController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CompleteInfoRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'accountNumber' => 'required',
-        ]); 
+        $request->validated();
 
         $categories = implode("-", $request->categories);
         $owner_id = auth()->user()->id;
@@ -42,6 +38,8 @@ class CompleteInfoController extends Controller
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'address' => $request->input('address'),
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
             'accountNumber' => $request->input('accountNumber'),
             'categories' => $categories,
             'owner_id' => $owner_id,

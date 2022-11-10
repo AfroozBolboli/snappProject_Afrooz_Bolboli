@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AdminFoodStoreRequest;
+use App\Http\Requests\admin\AdminFoodUpdateRequest;
 use App\Models\FoodCategory;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
@@ -37,13 +39,9 @@ class AdminFoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminFoodStoreRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'restaurantCategory' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
+        $request->validated();
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         
@@ -97,18 +95,14 @@ class AdminFoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminFoodUpdateRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
-
+        $request->validated();
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
 
-        $food = FoodCategory::where('id', $id)
+        $food = FoodCategory::find($id)
             ->update([
                 'title' => $request->input('title'),
                 'image_path' => $newImageName,

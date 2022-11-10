@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\seller\SellerAddFoodRequest;
 use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
@@ -49,14 +50,9 @@ class SellerAddFoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SellerAddFoodRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'mimes:jpg,png,jpeg|max:5048',
-            'price' => 'required',
-            'category' => 'required',
-        ]); 
+        $request->validated();
 
         if(!empty($request->image))
         {       
@@ -119,14 +115,9 @@ class SellerAddFoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SellerAddFoodRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'mimes:jpg,png,jpeg|max:5048',
-            'price' => 'required',
-            'category' => 'required',
-        ]); 
+        $request->validated();
 
         if(!empty($request->image))
         {       

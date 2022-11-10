@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\seller\SellerSettingRequest;
 use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
@@ -76,14 +77,9 @@ class SellerSettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SellerSettingRequest $request, $id)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'image' => 'mimes:jpg,png,jpeg|max:5048',
-        //     'price' => 'required',
-        //     'category' => 'required',
-        // ]); 
+        $request->validated();
 
         if(!empty($request->image))
         {       
@@ -94,19 +90,21 @@ class SellerSettingController extends Controller
             $newImageName = '';
 
         $categories = implode("-", $request->categories);
-
-        $restaurant = Restaurant::where('id', $id)
+        
+        $restaurant = Restaurant::find($id)
             ->update([
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
                 'address' => $request->input('address'),
                 'accountNumber' => $request->input('accountNumber'),
-                'workingHours' => $request->input('workingHours'),
+                'workingDay' => $request->input('workingDay'),
                 'restaurantPicture' => $newImageName,
                 'shippingCost' => $request->input('shippingCost'),
                 'status' => $request->input('status'),
                 'categories' => $categories,
         ]);
+
+
 
         return redirect('seller/setting');
     }

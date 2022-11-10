@@ -146,9 +146,29 @@
 
                         <input
                             type="text"
-                            class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400"
+                            class="block shadow-5xl mb-5 p-2 w-80 italic text-right placeholder-pink-400"
                             name="phone" 
                             placeholder="شماره تماس">
+
+                        <label class="text-xl">مختصات جغرافیایی</label><br>
+                        <div class="flex row">
+                            <div class="col">
+                                <input
+                                    type="text"
+                                    class="block shadow-5xl mb-10 w-20 mx-10 italic text-right placeholder-pink-400"
+                                    name="latitude" 
+                                    placeholder="عرض">
+                            </div>
+
+                            <div class="col">
+                                <input
+                                    type="text"
+                                    class="block shadow-5xl mb-10 p-2 w-20 italic text-right placeholder-pink-400"
+                                    name="longitude" 
+                                    placeholder="طول">
+                            </div>
+                        </div>
+
 
                         <input
                             type="text"

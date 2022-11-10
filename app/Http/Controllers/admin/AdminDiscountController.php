@@ -38,19 +38,7 @@ class AdminDiscountController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'restaurant_name' => 'required',
-            'price' => 'required',
-            'startingDate' => 'required',
-            'endingDate' => 'required',
-        ]); 
-
-        //this should be a rule but for now
-
-        //there shouldn not be two restaurants with
-        // the same name because registered restaurant names 
-        //in real world are never alike 
+        $request->validated();
 
         $validRestaurant = Restaurant::where('name', $request->restaurant_name)->first();
         if(empty($validRestaurant))

@@ -14,7 +14,9 @@ class Restaurant extends Model
     protected $fillable = 
     ['name', 'address', 'phone',
      'accountNumber', 'restaurantPicture',
-     'shippingCost', 'status', 'categories'];
+     'shippingCost', 'status', 'categories',
+    'owner_id', 'longitude', 'latitude',
+    'workingDay' , 'openingTime', 'closingTime'];
 
      public function food()
      {
