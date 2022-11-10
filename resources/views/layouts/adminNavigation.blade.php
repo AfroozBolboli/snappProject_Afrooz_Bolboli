@@ -20,7 +20,7 @@
                         {{ __('دسته بندی غذا ها') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('admin.discount.index')" :active="request()->routeIs('dashboard')">
                         {{ __('تخفیف ها') }}
                     </x-nav-link>
 

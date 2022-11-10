@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\AdminBannerController;
+use App\Http\Controllers\admin\AdminDiscountController;
 use App\Http\Controllers\admin\AdminFoodController;
-use App\Http\Controllers\admin\AdminRestaurantController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
-use App\Models\RestaurantCategory;
+use App\Http\Controllers\seller\SellerSettingController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +30,8 @@ Route::get('/dashboard', function () {
 
     if($role === 1)
         return view('admin.dashboard');
-    elseif($role === 2)
-    {
+    else
         return view('seller/infoPage');
-    }
-    
-    elseif($role === 3)
-        return view('customer.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -49,6 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/restaurantCategory', RestaurantCategoryController::class);
         Route::resource('/foodCategory', AdminFoodController::class);
         Route::resource('/banner', AdminBannerController::class);
+        Route::resource('/discount', AdminDiscountController::class);
     });
 
     Route::group([
@@ -61,16 +57,17 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::resource('/completeInfo', CompleteInfoController::class);
         Route::resource('/food', SellerAddFoodController::class);
-
+        Route::post('/food/filter', [SellerAddFoodController::class, 'filter']);
+        Route::resource('/setting', SellerSettingController::class);
     });
 
-    Route::group([
-        'prefix' => 'customer',
-        'middleware' => 'isCustomer',
-        'as' => 'customer.'
-    ], function(){
-        // Route::get('customerEx', [customerOnly::class, 'index']);
-    });
+    // Route::group([
+    //     'prefix' => 'customer',
+    //     'middleware' => 'isCustomer',
+    //     'as' => 'customer.'
+    // ], function(){
+    //     Route::get('customerEx', [customerOnly::class, 'index']);
+    // });
 });
 
 require __DIR__.'/auth.php';

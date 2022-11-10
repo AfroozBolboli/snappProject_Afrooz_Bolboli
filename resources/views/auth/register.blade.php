@@ -36,16 +36,6 @@
                 <x-input-error :messages="$errors->get('phone')" class="mt-2" />
             </div>
 
-            <!-- Choose Role -->
-            <div class="mt-4">
-                <x-input-label class="text-white text-lg" for="role" :value="__('نقش')" />
-                <select name="role" class="block mt-1 w-full text-right">
-                    <option value="2">فروشنده</option>
-                    <option value="3">خریدار</option>
-                </select>
-                <x-input-error :messages="$errors->get('role')" class="mt-2" />
-            </div>
-
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label class="text-white " for="password" :value="__('رمز عبور')" />

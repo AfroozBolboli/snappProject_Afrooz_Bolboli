@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AdminRestaurantCategoryRequest;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
 
@@ -36,15 +37,11 @@ class RestaurantCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminRestaurantCategoryRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
+        $request->validated();
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        
         $request->image->move(public_path('images'), $newImageName);
 
         $category = RestaurantCategory::create([
@@ -86,18 +83,14 @@ class RestaurantCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminRestaurantCategoryRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
-        ]); 
-
+        $request->validated();
 
         $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
 
-        $category = RestaurantCategory::where('id', $id)
+        $category = RestaurantCategory::find($id)
             ->update([
                 'title' => $request->input('title'),
                 'image_path' => $newImageName,

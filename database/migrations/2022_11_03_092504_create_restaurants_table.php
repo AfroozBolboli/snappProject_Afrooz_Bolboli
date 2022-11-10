@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('address');
             $table->integer('accountNumber');
             $table->string('categories');
+            $table->float('score');
             $table->float('latitude')->nullable();
             $table->float('longitude')->nullable();
             $table->string('restaurantPicture')->nullable();

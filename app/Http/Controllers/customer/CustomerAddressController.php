@@ -4,28 +4,29 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserAddressRequest;
-use App\Models\UserAddress;
+use App\Http\Resources\CustomerAddressResource;
+use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
-use illuminate\Database\Eloquent\SoftDeletes;
-
 
 class CustomerAddressController extends Controller
 {
     public function index()
     {
-        return UserAddress::all();
-        return 'meow';
+        $user = auth()->user()->id;
+        return 
+        CustomerAddressResource::collection(CustomerAddress::where('user_id', $user)->get());
     }
 
     public function store(StoreUserAddressRequest $request)
     {
         $request->validated();
 
-        $address = UserAddress::create([
+        $address = CustomerAddress::create([
             'title' => $request->input('title'),
             'address' => $request->input('address'),
             'latitude' => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
+            'user_id' => auth()->user()->id
         ]);
 
         return $address;
@@ -33,12 +34,23 @@ class CustomerAddressController extends Controller
 
     public function show($id)
     {
-        return UserAddress::find($id);
+        $user = auth()->user()->id;
+        $address = CustomerAddress::where('user_id', $user)
+        ->find($id)
+        ->get();
+
+        return CustomerAddressResource::collection($address);
     }
 
     public function update(StoreUserAddressRequest $request, $id)
     {
-        $address = UserAddress::find($id);
+        $request->validated();
+
+        $user = auth()->user()->id;
+        $address = CustomerAddress::where('user_id', $user)
+            ->get()
+            ->find($id);
+
         $address->update([
             'title' => $request->input('title'),
             'address' => $request->input('address'),
@@ -48,10 +60,10 @@ class CustomerAddressController extends Controller
 
         return 'با موفقیت تغییر داده شد';
     }
-    //use SoftDeletes;
 
     public function destroy($id)
     {
-        return UserAddress::find($id)->delete();
+        CustomerAddress::destroy($id);
+        return 'با موفقیت پاک شد';
     }
 }

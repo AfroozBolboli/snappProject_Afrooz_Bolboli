@@ -2,7 +2,7 @@
     <div class="m-auto w-4/8 py-24">
         <div class="text-center">
             <h1 class="text-5xl bold">
-                تغییر دسته ی رستوران
+                تغییر دسته ی غذا
             </h1>
         </div>
 

@@ -90,4 +90,12 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'ایمیل خود را درست وارد کنید',
+            'password.required' => 'رمز خود را درست وارد کنید '
+        ];
+    }
 }
