@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\customer\CustomerAddressController;
-use App\Models\UserAddress;
+use App\Http\Controllers\customer\UserAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 //public routes 
+Route::post('/register' , [UserAuthController::class, 'register']);
+Route::post('/login' , [UserAuthController::class, 'login']);
+
+
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
-    Route::get('/userAddress' , [CustomerAddressController::class, 'index']);
-    Route::post('/userAddress' , [CustomerAddressController::class, 'store']);
-    Route::patch('/userAddress/{id}' , [CustomerAddressController::class, 'update']);
-    Route::delete('/userAddress/{id}' , [CustomerAddressController::class, 'destroy']); 
+    Route::post('/logout' , [UserAuthController::class, 'logout']);
+    Route::resource('userAddress', CustomerAddressController::class);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

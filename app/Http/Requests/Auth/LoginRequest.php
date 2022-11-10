@@ -94,8 +94,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email' => 'ایمیل خود را درست وارد کنید',
-            'password' => 'رمز خود را درست وارد کنید '
+            'email.required' => 'ایمیل خود را درست وارد کنید',
+            'password.required' => 'رمز خود را درست وارد کنید '
         ];
     }
 }

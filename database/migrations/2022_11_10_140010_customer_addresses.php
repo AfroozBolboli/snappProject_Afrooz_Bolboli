@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create('customer_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->longText('address');
@@ -22,9 +22,8 @@ return new class extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
+                ->on('customers')
                 ->onDelete('cascade');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,8 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('user_addresses', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('customer_addresses');
     }
 };
