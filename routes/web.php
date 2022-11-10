@@ -30,13 +30,8 @@ Route::get('/dashboard', function () {
 
     if($role === 1)
         return view('admin.dashboard');
-    elseif($role === 2)
-    {
+    else
         return view('seller/infoPage');
-    }
-    elseif($role === 3)
-
-        return view('customer.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -66,13 +61,13 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/setting', SellerSettingController::class);
     });
 
-    Route::group([
-        'prefix' => 'customer',
-        'middleware' => 'isCustomer',
-        'as' => 'customer.'
-    ], function(){
-        // Route::get('customerEx', [customerOnly::class, 'index']);
-    });
+    // Route::group([
+    //     'prefix' => 'customer',
+    //     'middleware' => 'isCustomer',
+    //     'as' => 'customer.'
+    // ], function(){
+    //     Route::get('customerEx', [customerOnly::class, 'index']);
+    // });
 });
 
 require __DIR__.'/auth.php';

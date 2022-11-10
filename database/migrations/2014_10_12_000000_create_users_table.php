@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role')->default(2); //1 = Admin, 2 = Seller, 3 = customer 
+            $table->integer('role')->default(2); //1 = Admin, 2 = Seller
             $table->rememberToken();
             $table->timestamps();
         });

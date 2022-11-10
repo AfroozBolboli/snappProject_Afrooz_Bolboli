@@ -17,14 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 //public routes 
-Route::get('/userAddress' , [CustomerAddressController::class, 'index']);
-Route::post('/userAddress' , [CustomerAddressController::class, 'store']);
-Route::patch('/userAddress/{id}' , [CustomerAddressController::class, 'update']);
-Route::delete('/userAddress/{id}' , [CustomerAddressController::class, 'destroy']);
 
+//Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
-
-
+    Route::get('/userAddress' , [CustomerAddressController::class, 'index']);
+    Route::post('/userAddress' , [CustomerAddressController::class, 'store']);
+    Route::patch('/userAddress/{id}' , [CustomerAddressController::class, 'update']);
+    Route::delete('/userAddress/{id}' , [CustomerAddressController::class, 'destroy']); 
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
