@@ -20,6 +20,8 @@ return new class extends Migration
             $table->float('price');
             $table->string('image_path');
             $table->string('category');
+            $table->boolean('foodParty')->default(0);
+            $table->string('discountPrice')->default(0);
             $table->unsignedInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')
                 ->references('id')

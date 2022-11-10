@@ -14,7 +14,8 @@ class Food extends Model
     protected $fillable = 
     ['name', 'ingredient', 'price',
      'image_path', 'category',
-     'restaurant_id'];
+     'restaurant_id', 'discountPrice',
+    'foodParty'];
 
     public function restraunt()
     {
