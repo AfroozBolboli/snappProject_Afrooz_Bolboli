@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminBannerController;
 use App\Http\Controllers\admin\AdminDiscountController;
 use App\Http\Controllers\admin\AdminFoodController;
+use App\Http\Controllers\admin\AdminFoodpartyController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
@@ -45,6 +46,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/foodCategory', AdminFoodController::class);
         Route::resource('/banner', AdminBannerController::class);
         Route::resource('/discount', AdminDiscountController::class);
+        Route::get('/foodparty/foodlist/all', [AdminFoodpartyController::class, 'foodlist']);
+        Route::resource('/foodparty', AdminFoodpartyController::class);
+
     });
 
     Route::group([
