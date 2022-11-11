@@ -80,7 +80,6 @@
             @endforeach
         </div>
 
-        
     {{$foods->links()}}
 
 

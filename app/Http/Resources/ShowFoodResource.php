@@ -16,7 +16,7 @@ class ShowFoodResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->categories,
+            'title' => $this->name,
             'price' => "$this->price".'تومن',
             'off' => 'تومن'."$this->discountPrice",
             'image' => $this->image_path,
