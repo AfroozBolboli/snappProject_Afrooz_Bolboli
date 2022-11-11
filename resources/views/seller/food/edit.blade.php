@@ -27,8 +27,9 @@
                         
                         <label>تخفیف</label><br>
                         <select name="discount">
+                            <option value="0"> هیچکدام</option>
                             @foreach($discounts as $discount)
-                                <option value="{{$discount->title}}">{{$discount->price}}قیمت  {{$discount->title}}کد </option>
+                                <option value="{{$discount->price}}">{{$discount->price}}قیمت  {{$discount->title}}کد </option>
                             @endforeach
                         </select>
 
@@ -57,6 +58,13 @@
                             name="price" 
                             value="{{$food->price}}"
                             placeholder="قیمت غذا">
+
+                        <div class="flex justify-center space-x-5 mb-5 ">  
+                            <input type="hidden" name="foodparty" value="0">
+                            <input type="checkbox" value="1" name="foodparty"
+                            class="rounded bg-gray-100 focus:ring-pink-500 text-pink-500" >
+                            <label>اضافه کردن به فودپارتی</label><br>
+                        </div>
 
                     <button type="submit" class="bg-pink-500 block shadow-5xl mb-10 p-2 w-80 uppercase font-bold text-white">
                         ثبت 

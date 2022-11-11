@@ -24,7 +24,7 @@
                         {{ __('تخفیف ها') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('admin.foodparty.index')" :active="request()->routeIs('dashboard')">
                         {{ __('فود پارتی') }}
                     </x-nav-link>
 

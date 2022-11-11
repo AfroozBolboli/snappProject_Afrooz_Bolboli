@@ -85,7 +85,7 @@ class AdminFoodController extends Controller
     public function edit($id)
     {
         $food = FoodCategory::find($id);
-        return view('admin/foodCategory/edit')->with('food', $food);
+        return view('admin.foodCategory.edit')->with('food', $food);
     }
 
     /**

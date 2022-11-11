@@ -66,9 +66,12 @@ class SellerAddFoodController extends Controller
                 $ingredient = $request->input('ingredient');
             else
                 $ingredient = '';
+
             $food = Food::create([
                 'name' => $request->input('name'),
                 'ingredient' => $ingredient,
+                'discountPrice' => $request->input('discount'),
+                'foodParty' => $request->input('foodparty'),
                 'price' => $request->input('price'),
                 'category' => $request->input('category'),
                 'image_path' => $newImageName,
@@ -133,10 +136,12 @@ class SellerAddFoodController extends Controller
         else
             $ingredient = '';
 
-        $food = Food::where('id', $id)
+        $food = Food::find($id)
             ->update([
                 'name' => $request->input('name'),
                 'ingredient' => $ingredient,
+                'discountPrice' => $request->input('discount'),
+                'foodParty' => $request->input('foodparty'),
                 'price' => $request->input('price'),
                 'category' => $foodCategory,
                 'image_path' => $newImageName,

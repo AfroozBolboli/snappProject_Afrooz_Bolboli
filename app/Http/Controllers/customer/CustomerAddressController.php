@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserAddressRequest;
 use App\Http\Resources\CustomerAddressResource;
 use App\Models\CustomerAddress;
-
+use Illuminate\Http\Request;
 
 class CustomerAddressController extends Controller
 {
@@ -36,14 +36,16 @@ class CustomerAddressController extends Controller
     {
         $user = auth()->user()->id;
         $address = CustomerAddress::where('user_id', $user)
-        ->get()
-        ->find($id);
+        ->find($id)
+        ->get();
 
-        return $address;
+        return CustomerAddressResource::collection($address);
     }
 
     public function update(StoreUserAddressRequest $request, $id)
     {
+        $request->validated();
+
         $user = auth()->user()->id;
         $address = CustomerAddress::where('user_id', $user)
             ->get()
