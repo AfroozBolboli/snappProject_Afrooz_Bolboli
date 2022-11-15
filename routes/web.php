@@ -28,7 +28,6 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $role = auth()->user()->role;
-
     if($role === 1)
         return view('admin.dashboard');
     else

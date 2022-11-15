@@ -14,11 +14,6 @@ use Throwable;
 
 class SellerAddFoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
@@ -28,11 +23,6 @@ class SellerAddFoodController extends Controller
         return view('seller.food.index')->with('foods', $foods);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
@@ -44,12 +34,6 @@ class SellerAddFoodController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(SellerAddFoodRequest $request)
     {
         $request->validated();
@@ -81,23 +65,6 @@ class SellerAddFoodController extends Controller
         return redirect('seller/food');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
@@ -111,13 +78,6 @@ class SellerAddFoodController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(SellerAddFoodRequest $request, $id)
     {
         $request->validated();
@@ -150,12 +110,6 @@ class SellerAddFoodController extends Controller
         return redirect('seller/food');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $food = Food::find($id);
