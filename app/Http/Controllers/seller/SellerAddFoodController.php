@@ -8,13 +8,14 @@ use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
 use App\Models\Restaurant;
-use App\Models\RestaurantCategory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class SellerAddFoodController extends Controller
 {
+    use SoftDeletes;
     public function index()
     {
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();

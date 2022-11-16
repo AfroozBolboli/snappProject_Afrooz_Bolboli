@@ -38,6 +38,8 @@ return new class extends Migration
             $table->string('workingDay')->nullable();
             $table->time('openingTime')->nullable();
             $table->time('closingTime')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

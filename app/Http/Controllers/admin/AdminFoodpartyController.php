@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\AdminFoodpartRequest;
 use App\Models\Food;
 use App\Models\Foodparty;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 class AdminFoodpartyController extends Controller
 {
+    use SoftDeletes;
 
     public function index()
     {

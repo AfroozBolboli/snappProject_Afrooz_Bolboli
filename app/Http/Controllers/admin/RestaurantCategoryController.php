@@ -5,11 +5,13 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\AdminRestaurantCategoryRequest;
 use App\Models\RestaurantCategory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RestaurantCategoryController extends Controller
 {
+    use SoftDeletes;
 
     public function index()
     {

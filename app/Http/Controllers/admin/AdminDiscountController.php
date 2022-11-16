@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AdminDiscountRequest;
 use App\Models\Discount;
 use App\Models\Restaurant;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 class AdminDiscountController extends Controller
 {
+    use SoftDeletes;
 
     public function index()
     {
@@ -21,7 +24,7 @@ class AdminDiscountController extends Controller
         return view('admin.discount.create');
     }
 
-    public function store(Request $request)
+    public function store(AdminDiscountRequest $request)
     {
         $request->validated();
 
@@ -48,12 +51,6 @@ class AdminDiscountController extends Controller
         ]);
 
         return redirect('admin/discount');
-    }
-
-    public function show($id)
-    {
-        $discount = Discount::find($id);
-        return view('admin.discount.show')->with('discount', $discount);
     }
 
     public function destroy($id)
