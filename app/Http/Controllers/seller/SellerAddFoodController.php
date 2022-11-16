@@ -10,15 +10,11 @@ use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class SellerAddFoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
@@ -28,11 +24,6 @@ class SellerAddFoodController extends Controller
         return view('seller.food.index')->with('foods', $foods);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
@@ -44,28 +35,20 @@ class SellerAddFoodController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(SellerAddFoodRequest $request)
     {
         $request->validated();
 
         if(!empty($request->image))
         {       
-            $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $newImageName);
+            $image_path = time().$request->file('image')->getClientOriginalName();
+            $uploadImage = Storage::disk('public')->putFileAs('sellerAddFood/',$request->file('image'), $image_path);
         }
 
             $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
             $restaurant_id = $restaurant_id->id;
-            if($request->input('ingredient'))
-                $ingredient = $request->input('ingredient');
-            else
-                $ingredient = '';
+            
+            (!empty($request->input('ingredient'))) ? ($ingredient = $request->input('ingredient')) : ($ingredient = '');
 
             $food = Food::create([
                 'name' => $request->input('name'),
@@ -74,30 +57,13 @@ class SellerAddFoodController extends Controller
                 'foodParty' => $request->input('foodparty'),
                 'price' => $request->input('price'),
                 'category' => $request->input('category'),
-                'image_path' => $newImageName,
+                'image_path' => $image_path,
                 'restaurant_id' => $restaurant_id
             ]);
 
         return redirect('seller/food');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
@@ -111,30 +77,23 @@ class SellerAddFoodController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(SellerAddFoodRequest $request, $id)
     {
         $request->validated();
 
         if(!empty($request->image))
         {       
-            $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $newImageName);
+            $image_path = time().$request->file('image')->getClientOriginalName();
+            $uploadImage = Storage::disk('public')->putFileAs('sellerAddFood/',$request->file('image'), $image_path);
+            Storage::disk('public')->delete('sellerAddFood/'.FoodCategory::find($id)->image_path);
         }
         else
-            $newImageName = '';
+            $image_path = '';
 
         $foodCategory = FoodCategory::where('title',$request->category)->first()->id;
-        if($request->input('ingredient'))
-            $ingredient = $request->input('ingredient');
-        else
-            $ingredient = '';
+
+        (!empty($request->input('ingredient'))) ? ($ingredient = $request->input('ingredient')) : ($ingredient = '');
+        
 
         $food = Food::find($id)
             ->update([
@@ -144,21 +103,16 @@ class SellerAddFoodController extends Controller
                 'foodParty' => $request->input('foodparty'),
                 'price' => $request->input('price'),
                 'category' => $foodCategory,
-                'image_path' => $newImageName,
+                'image_path' => $image_path,
         ]);
 
         return redirect('seller/food');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $food = Food::find($id);
+        Storage::disk('public')->delete('sellerAddFood/'.$food->image_path);   
         $food->delete();
         return redirect('seller/food');
     }

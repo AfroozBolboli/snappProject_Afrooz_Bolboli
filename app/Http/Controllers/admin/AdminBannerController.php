@@ -6,107 +6,65 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\AdminBannerRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class AdminBannerController extends Controller
 {
-        /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $banners = Banner::all();
-        return view('admin/banner/index')->with('banners', $banners);
+        return view('admin.banner.index')->with('banners', $banners);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin/banner/create');
+        return view('admin.banner.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(AdminBannerRequest $request)
+    public function store(Request $request)
     {
         $request->validated();
-        $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        
-        $request->image->move(public_path('images'), $newImageName);
+
+        $image_path = time().$request->file('image')->getClientOriginalName();
+        $uploadImage = Storage::disk('public')->putFileAs('adminBanner/',$request->file('image'), $image_path);
 
         $banner = Banner::create([
             'title' => $request->input('title'),
-            'image_path' => $newImageName
+            'image_path' => $image_path
         ]);
 
         return redirect('admin/banner');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $banner = Banner::find($id);
-        return view('admin/banner/show')->with('banner', $banner);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $banner = Banner::find($id);
-        return view('admin/banner/edit')->with('banner', $banner);
+        return view('admin.banner.edit')->with('banner', $banner);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(AdminBannerRequest $request, $id)
     {
         $request->validated();
 
-        $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $image_path = time().$request->file('image')->getClientOriginalName();
+        $uploadImage = Storage::disk('public')->putFileAs('adminBanner/',$request->file('image'), $image_path);
+        Storage::disk('public')->delete('adminBanner/'.Banner::find($id)->image_path);
 
         $banner = Banner::find($id)
             ->update([
                 'title' => $request->input('title'),
-                'image_path' => $newImageName,
+                'image_path' => $image_path,
         ]);
 
         return redirect('admin/banner');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $banner = Banner::find($id);
+        Storage::disk('public')->delete('adminBanner/'.$banner->image_path);   
         $banner->delete();
         return redirect('admin/banner');
     }

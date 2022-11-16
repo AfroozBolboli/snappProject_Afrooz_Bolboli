@@ -39,9 +39,9 @@
                             <input type="radio" value="{{$category->title}}" name="category"
                             class="rounded bg-gray-100 focus:ring-pink-500 text-pink-500" >
                             <label>{{$category->title}}</label><br>
-
-                            @endforeach
                             </div> 
+                            @endforeach
+
 
                         </div>
 

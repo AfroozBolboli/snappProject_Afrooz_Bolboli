@@ -8,58 +8,16 @@ use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SellerSettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $restaurant = Restaurant::where('owner_id', auth()->user()->id)->first();
         return view('seller.setting.index')-> with('restaurant', $restaurant);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $restaurant = Restaurant::where('owner_id', auth()->user()->id)->first();
@@ -70,24 +28,18 @@ class SellerSettingController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(SellerSettingRequest $request, $id)
     {
         $request->validated();
 
         if(!empty($request->image))
         {       
-            $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $newImageName);
+            $image_path = time().$request->file('image')->getClientOriginalName();
+            $uploadImage = Storage::disk('public')->putFileAs('restaurantPicture/',$request->file('image'), $image_path);
+            Storage::disk('public')->delete('restaurantPicture/'.Restaurant::find($id)->image_path);
         }
         else
-            $newImageName = '';
+            $image_path = '';
 
         $categories = implode("-", $request->categories);
         
@@ -98,7 +50,7 @@ class SellerSettingController extends Controller
                 'address' => $request->input('address'),
                 'accountNumber' => $request->input('accountNumber'),
                 'workingDay' => $request->input('workingDay'),
-                'restaurantPicture' => $newImageName,
+                'restaurantPicture' => $image_path,
                 'shippingCost' => $request->input('shippingCost'),
                 'status' => $request->input('status'),
                 'categories' => $categories,
@@ -107,16 +59,5 @@ class SellerSettingController extends Controller
 
 
         return redirect('seller/setting');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

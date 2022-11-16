@@ -36,8 +36,8 @@ class CustomerAddressController extends Controller
     {
         $user = auth()->user()->id;
         $address = CustomerAddress::where('user_id', $user)
-        ->find($id)
-        ->get();
+            ->find($id)
+            ->get();
 
         return CustomerAddressResource::collection($address);
     }
@@ -46,8 +46,8 @@ class CustomerAddressController extends Controller
     {
         $request->validated();
 
-        $user = auth()->user()->id;
-        $address = CustomerAddress::where('user_id', $user)
+        $user_id = auth()->user()->id;
+        $address = CustomerAddress::where('user_id', $user_id)
             ->get()
             ->find($id);
 

@@ -1,7 +1,7 @@
 <x-AdminApp-layout>
     <x-slot name="header">
         <h2 class="text-3xl bold text-white leading-tight text-center">
-            {{ __('بنرهای غذا ') }}
+            {{ __('بنرهای غذا') }}
         </h2>
     </x-slot>
 
@@ -33,7 +33,8 @@
                     </div>
                     <div class=" text-center " >
                         <img 
-                        src="{{ asset('images/'.$banner->image_path) }}" 
+                        src="{{ asset('storage/adminBanner/'.$banner->image_path) }}" 
+
                         class="w-10/12 mb-4 shadow-xl rounded-lg"
                         alt="{{$banner->title}}">
 
