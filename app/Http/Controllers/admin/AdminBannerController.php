@@ -11,29 +11,22 @@ use Illuminate\Http\File;
 
 class AdminBannerController extends Controller
 {
-        /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $banners = Banner::all();
-        return view('admin/banner/index')->with('banners', $banners);
+        return view('admin.banner.index')->with('banners', $banners);
     }
 
     public function create()
     {
-        return view('admin/banner/create');
+        return view('admin.banner.create');
     }
 
     public function store(Request $request)
     {
-        // $request->validated();
+        $request->validated();
 
         $image_path = time().$request->file('image')->getClientOriginalName();
-        // $request->image->move(public_path('images'), $image_path);
-        // @ts-ignore
         $uploadImage = Storage::disk('public')->putFileAs('adminBanner/',$request->file('image'), $image_path);
 
         $banner = Banner::create([
@@ -47,20 +40,21 @@ class AdminBannerController extends Controller
     public function edit($id)
     {
         $banner = Banner::find($id);
-        return view('admin/banner/edit')->with('banner', $banner);
+        return view('admin.banner.edit')->with('banner', $banner);
     }
 
     public function update(AdminBannerRequest $request, $id)
     {
         $request->validated();
 
-        $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $image_path = time().$request->file('image')->getClientOriginalName();
+        $uploadImage = Storage::disk('public')->putFileAs('adminBanner/',$request->file('image'), $image_path);
+        Storage::disk('public')->delete('adminBanner/'.Banner::find($id)->image_path);
 
         $banner = Banner::find($id)
             ->update([
                 'title' => $request->input('title'),
-                'image_path' => $newImageName,
+                'image_path' => $image_path,
         ]);
 
         return redirect('admin/banner');
@@ -70,6 +64,7 @@ class AdminBannerController extends Controller
     public function destroy($id)
     {
         $banner = Banner::find($id);
+        Storage::disk('public')->delete('adminBanner/'.$banner->image_path);   
         $banner->delete();
         return redirect('admin/banner');
     }

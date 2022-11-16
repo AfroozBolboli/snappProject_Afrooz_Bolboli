@@ -56,9 +56,9 @@
                     </div>
                     <div class=" text-center flex justify-center space-x-20 space-y-16" >
                         <img 
-                        src="{{ asset('images/'.$food->image_path) }}" 
-                        class="w-3/12 mb-4 shadow-xl rounded-full"
-                        alt="{{$food->title}}">
+                            src="{{ asset('storage/sellerAddFood/'.$food->image_path) }}" 
+                            class="w-3/12 mb-4 shadow-xl rounded-full"
+                            alt="{{$food->title}}">
 
                     <div class="text-pink-600 font-bold text-xl italic" >
                         <span>

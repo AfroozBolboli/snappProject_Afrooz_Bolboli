@@ -15,7 +15,7 @@
                     </div>
                     <div class="text-center flex space-x-32" >
                         <img 
-                        src="{{ asset('images/'.$restaurant->restaurantPicture) }}" 
+                        src="{{ asset('storage/restaurantPicture/'.$restaurant->restaurantPicture) }}" 
                         class="w-5/12 mb-4 shadow-xl rounded-lg"
                         alt="{{$restaurant->title}}">
 

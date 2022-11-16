@@ -33,7 +33,7 @@
                     </div>
                     <div class="flex justify-center space-x-20 rounded-lg" >
                         <img 
-                        src="{{ asset('images/'.$food->image_path) }}" 
+                        src="{{ asset('storage/adminFood/'.$food->image_path) }}" 
                         class="w-2/12 mb-4 shadow-xl rounded-full"
                         alt="{{$food->title}}">
 

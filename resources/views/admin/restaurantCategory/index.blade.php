@@ -33,7 +33,7 @@
                     </div>
                     <div class="flex justify-center space-x-20 " >
                         <img 
-                        src="{{ asset('images/'.$category->image_path) }}" 
+                        src="{{ asset('storage/adminRestaurantCategory/'.$category->image_path) }}" 
                         class="w-2/12 mb-4 shadow-xl rounded-full"
                         alt="{{$category->title}}">
 

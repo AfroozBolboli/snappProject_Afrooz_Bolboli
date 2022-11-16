@@ -1,7 +1,7 @@
 <x-SellerApp-layout>
     <div class="m-auto w-4/8 py-24">
             <div class="text-center">
-                <h1 class="text-5xl uppercase bold">
+                <h1 class="text-5xl bold">
                     ایجاد غذای جدید
                 </h1>
             </div>
@@ -37,8 +37,8 @@
                                 <input type="radio" value="{{$category->title}}" name="category"
                                 class="rounded bg-gray-100 focus:ring-pink-500 text-pink-500 " >
                                 <label>{{$category->title}}</label><br>
+                                </div>
                                 @endforeach
-                            </div>
                         </div>
 
                         <input

@@ -8,44 +8,30 @@ use App\Http\Requests\admin\AdminFoodUpdateRequest;
 use App\Models\FoodCategory;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class AdminFoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $foods = FoodCategory::all();
         return view('admin/foodCategory/index')->with('foods', $foods);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin/foodCategory/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(AdminFoodStoreRequest $request)
     {
         $request->validated();
 
-        $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        
-        $request->image->move(public_path('images'), $newImageName);
+        $image_path = time().$request->file('image')->getClientOriginalName();
+        $uploadImage = Storage::disk('public')->putFileAs('adminFood/',$request->file('image'), $image_path);
+
         try
         {
             $restaurantCategory = RestaurantCategory::where('title',$request->restaurantCategory)->first()->id;
@@ -53,7 +39,7 @@ class AdminFoodController extends Controller
             $food = FoodCategory::create([
                 'title' => $request->input('title'),
                 'restaurantCategory_id' => $restaurantCategory,
-                'image_path' => $newImageName
+                'image_path' => $image_path
             ]);
         }catch (Throwable $e) {
             report($e);
@@ -64,62 +50,34 @@ class AdminFoodController extends Controller
         return redirect('admin/foodCategory');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $food = FoodCategory::find($id);
-        return view('admin/foodCategory/show')->with('food', $food);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $food = FoodCategory::find($id);
         return view('admin.foodCategory.edit')->with('food', $food);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(AdminFoodUpdateRequest $request, $id)
     {
         $request->validated();
 
-        $newImageName = time().'-'.$request->title.'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $image_path = time().$request->file('image')->getClientOriginalName();
+        $uploadImage = Storage::disk('public')->putFileAs('adminFood/',$request->file('image'), $image_path);
+        Storage::disk('public')->delete('adminFood/'.FoodCategory::find($id)->image_path);
 
         $food = FoodCategory::find($id)
             ->update([
                 'title' => $request->input('title'),
-                'image_path' => $newImageName,
+                'image_path' => $image_path,
         ]);
 
         return redirect('admin/foodCategory');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $food = FoodCategory::find($id);
+        Storage::disk('public')->delete('adminFood/'.$food->image_path);  
         $food->delete();
         return redirect('admin/foodCategory');
     }
