@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\CompleteInfoRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use App\Models\RestaurantWorkingTime;
 use Illuminate\Http\Request;
 
 class CompleteInfoController extends Controller
@@ -13,7 +14,7 @@ class CompleteInfoController extends Controller
     public function index()
     {
 
-        return view('seller/CompleteInfo/create');
+        return view('seller.CompleteInfo.create');
     }
 
     public function create()
@@ -21,10 +22,10 @@ class CompleteInfoController extends Controller
         $auth = Restaurant::where('owner_id', auth()->user()->id)->first();
         if(!empty($auth))
         {
-            return view('seller/dashboard');
+            return view('seller.dashboard');
         }
         $categories = RestaurantCategory::all();
-        return view('seller/CompleteInfo/create')->with('categories', $categories);
+        return view('seller.CompleteInfo.create')->with('categories', $categories);
     }
 
 
@@ -34,7 +35,8 @@ class CompleteInfoController extends Controller
 
         $categories = implode("-", $request->categories);
         $owner_id = auth()->user()->id;
-        $info = Restaurant::create([
+
+        $Restaurant = Restaurant::create([
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'address' => $request->input('address'),
@@ -43,6 +45,10 @@ class CompleteInfoController extends Controller
             'accountNumber' => $request->input('accountNumber'),
             'categories' => $categories,
             'owner_id' => $owner_id,
+        ]);
+
+        $workingTime = RestaurantWorkingTime::create([
+            'restaurant_id' => $Restaurant->id
         ]);
 
         return redirect('seller/dashboard');

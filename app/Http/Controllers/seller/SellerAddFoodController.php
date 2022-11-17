@@ -127,18 +127,18 @@ class SellerAddFoodController extends Controller
         {
             $foods = Food::where('restaurant_id', $restaurant_id)
                     ->where('name', 'like', '%'.request('foodFilter').'%')
-                    ->get();
+                    ->paginate(2);
         }
         elseif(request('categoryFilter'))
         {
             $foods =  Food::where('restaurant_id', $restaurant_id)
                     ->where('category', request('categoryFilter'))
-                    ->get();
+                    ->paginate(2);
         }
         else
         {
             $foods =  Food::where('restaurant_id', $restaurant_id)
-                      ->get();
+            ->paginate(2);
         }
 
         return view('seller.food.index')->with('foods', $foods);

@@ -29,4 +29,9 @@ class Restaurant extends Model
          return $this->belongsTo(User::class);
      }
 
+     public function workingTime()
+     {
+         return $this->hasOne(RestaurantWorkingTime::class);
+     }
+
 }

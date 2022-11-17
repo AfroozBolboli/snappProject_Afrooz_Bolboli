@@ -7,6 +7,7 @@ use App\Http\Requests\seller\SellerSettingRequest;
 use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use App\Models\RestaurantWorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,13 +44,17 @@ class SellerSettingController extends Controller
 
         $categories = implode("-", $request->categories);
         
+        $workingTime = RestaurantWorkingTime::find($id)
+            ->update([
+
+            ]);
+
         $restaurant = Restaurant::find($id)
             ->update([
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
                 'address' => $request->input('address'),
                 'accountNumber' => $request->input('accountNumber'),
-                'workingDay' => $request->input('workingDay'),
                 'restaurantPicture' => $image_path,
                 'shippingCost' => $request->input('shippingCost'),
                 'status' => $request->input('status'),
