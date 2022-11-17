@@ -34,7 +34,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            // $table->boolean('status')->default(0); //if the shop is entirely closed or opem
+            $table->boolean('status')->default(0); //if the shop is entirely closed or opem
             // $table->string('workingDay')->nullable();
             // $table->time('openingTime')->nullable();
             // $table->time('closingTime')->nullable();

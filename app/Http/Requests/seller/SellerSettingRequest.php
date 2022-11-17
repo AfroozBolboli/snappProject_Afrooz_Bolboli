@@ -27,15 +27,17 @@ class SellerSettingRequest extends FormRequest
             'name' => 'required',
             'image' => 'mimes:jpg,png,jpeg|max:5048',
             'shippingCost' => 'required',
+            'categories' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'باید اسم غذا را وارد کنید',
-            'image.required' => 'باید عکس غذا را وارد کنید',     
-            'shippingCost.required' => 'باید قیمت غذا را وارد کنید', 
+            'name.required' => 'باید اسم رستوران را وارد کنید',
+            'image.required' => 'باید عکس رستوران را وارد کنید',     
+            'categories.required' => 'باید دسته بندی رستوران را وارد کنید',     
+            'shippingCost.required' => 'باید کرایه ی حمل و نقل را وارد کنید', 
             
             'image.mimes' => 'فورمت قابل قبول jpg,png,jpeg',     
             'image.max' => 'حجم باید کمتر از ۵۰۴۸ کیلوبایت باشد',    
