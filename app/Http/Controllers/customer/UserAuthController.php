@@ -41,16 +41,16 @@ class UserAuthController extends Controller
         $customer = Customer::where('email', $request->email)->first();
 
         //Check Password
-        if(!$customer)
+        if(!$customer && !Hash::check($request->password, $customer->password))
         {
-            return response(' میباشد', 401);
+            return response(' اطلاعات وارد شده اشتباه می باشد میباشد', 401);
         }
 
-        if(!Hash::check($request->password, $customer->password))
-        {
-            echo $customer->password;
-            return response('اطلاعات د', 401);
-        }
+        // if())
+        // {
+        //     echo $customer->password;
+        //     return response('اطلاعات د', 401);
+        // }
             
         $token = $customer->createToken('User token')->plainTextToken;
 
@@ -66,6 +66,6 @@ class UserAuthController extends Controller
     {
         auth()->user()->tokens->each->delete();
 
-        return 'شما با موفقیت خارج شدید';
+        return response('شما با موفقیت خارج شدید', 201);
     }
 }

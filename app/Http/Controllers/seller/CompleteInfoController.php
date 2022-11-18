@@ -7,7 +7,6 @@ use App\Http\Requests\seller\CompleteInfoRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use App\Models\RestaurantWorkingTime;
-use Illuminate\Http\Request;
 
 class CompleteInfoController extends Controller
 {

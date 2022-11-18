@@ -2,18 +2,16 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RestaurantWorkingTime;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RestaurantResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
+
+
     public function toArray($request)
     {
+        $workingTime = RestaurantWorkingTime::where('restaurant_id', $this->id);
         return [
             'id' => $this->id,
             'type' => $this->categories,
@@ -25,9 +23,36 @@ class RestaurantResource extends JsonResource
             'is_open' => $this->status,
             'image' => $this->restaurantPicture,
             // 'score' => $this->score,
-            'workingDay' => $this->workingDay,
-            'openingTime' => $this->openingTime,
-            'closingTime' => $this->closingTime,
+            "schedule" => [
+                "شنبه" => [
+                    'ساعت شروع' => $this->workingTime->saturdayStart,
+                    'ساعت پایان' => $this->workingTime->saturdayEnd,
+                ],
+                'یک شنبه' => [
+                    'ساعت شروع' => $this->workingTime->sundayStart,
+                    'ساعت پایان' => $this->workingTime->sundayEnd,
+                ],
+                'دوشنبه' => [
+                    'ساعت شروع' => $this->workingTime->mondayStart,
+                    'ساعت پایان' => $this->workingTime->mondayEnd,
+                ],
+                'سه شنبه' => [
+                    'ساعت شروع' => $this->workingTime->tuesdayStart,
+                    'ساعت پایان' => $this->workingTime->tuesdayEnd,
+                ],
+                'چهارشنبه' => [
+                    'ساعت شروع' => $this->workingTime->wednesdayStart,
+                    'ساعت پایان' => $this->workingTime->wednesdayEnd,
+                ],
+                'پنجشنبه' => [
+                    'ساعت شروع' => $this->workingTime->thursdayStart,
+                    'ساعت پایان' => $this->workingTime->thursdayEnd,
+                ],
+                'جمعه' => [
+                    'ساعت شروع' => $this->workingTime->fridayStart,
+                    'ساعت پایان' => $this->workingTime->fridayEnd,
+                ],
+            ],
 
         ];
         return parent::toArray($request);

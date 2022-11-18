@@ -3,28 +3,29 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Customer;
+use App\Models\CustomerAddress;
+use App\Models\Restaurant;
+use App\Models\User;
+use App\Policies\CustomerAddressPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        CustomerAddress::class => CustomerAddressPolicy::class
     ];
-
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
     public function boot()
     {
         $this->registerPolicies();
 
-        //
+        // Gate::define('show-Address', function (Customer $customer, CustomerAddress $customerAddress) {
+        //     return $customerAddress->user_id == $customer->id;
+        // });
+
+        Gate::define(('customerAddress'), fn(Customer $customer, CustomerAddress $customerAddress) => $customerAddress->user_id == $customer->id);
+        //Gate::define(('retaurantOwner'), fn(User $user, Restaurant $restaurant) => $restaurant->owner_id == $user->id);
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->json('currentAddress')->nullable();
             $table->string('email')->unique();
             $table->bigInteger('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
