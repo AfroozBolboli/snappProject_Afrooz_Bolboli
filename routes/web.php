@@ -10,6 +10,7 @@ use App\Http\Controllers\seller\SellerAddFoodController;
 use App\Http\Controllers\seller\SellerSettingController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,13 +28,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $role = auth()->user()->role;
-    if($role === 1)
+    if (Gate::allows('isAdmin', auth()->user())) 
         return view('admin.dashboard');
     else
-        return view('seller/infoPage');
+        return view('seller.infoPage');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group([

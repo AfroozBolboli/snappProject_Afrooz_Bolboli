@@ -79,8 +79,7 @@
                 </div>
             @endforeach
         </div>
-
-    {{$foods->links()}}
+    {{$foods}}
 
 
     </div>

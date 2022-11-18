@@ -15,7 +15,9 @@ class ShowFoodResource extends JsonResource
     public function toArray($request)
     {
         return [
+            
             'id' => $this->id,
+            'category' => $this->category,
             'title' => $this->name,
             'price' => "$this->price".'تومن',
             'off' => 'تومن'."$this->discountPrice",

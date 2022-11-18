@@ -27,4 +27,23 @@ class Food extends Model
     {
        return $this->hasMany(Foodparty::class);
     }
+
+    public function scopeFilter($query, $request, $restaurant_id)
+    {
+        if($request->get('foodFilter'))
+        {
+            $query
+                ->where('restaurant_id', $restaurant_id)
+                ->where('name', 'like', '%'.request('foodFilter').'%');
+        }
+        if($request->get('categoryFilter'))
+        {
+            $query
+                ->where('restaurant_id', $restaurant_id)
+                ->where('category', request('categoryFilter'));
+        }
+        else{
+            $query->where('restaurant_id', $restaurant_id);
+        }
+    }
 }

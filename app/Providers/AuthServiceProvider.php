@@ -26,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         // });
 
         Gate::define(('customerAddress'), fn(Customer $customer, CustomerAddress $customerAddress) => $customerAddress->user_id == $customer->id);
+        Gate::define(('isAdmin'), fn(User $user) => $user->role == 1);
         //Gate::define(('retaurantOwner'), fn(User $user, Restaurant $restaurant) => $restaurant->owner_id == $user->id);
     }
 }

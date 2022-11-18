@@ -122,24 +122,10 @@ class SellerAddFoodController extends Controller
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();
         if(!empty($restaurant_id))
             $restaurant_id = $restaurant_id->id;
-            
-        if(request('foodFilter'))
-        {
-            $foods = Food::where('restaurant_id', $restaurant_id)
-                    ->where('name', 'like', '%'.request('foodFilter').'%')
-                    ->paginate(2);
-        }
-        elseif(request('categoryFilter'))
-        {
-            $foods =  Food::where('restaurant_id', $restaurant_id)
-                    ->where('category', request('categoryFilter'))
-                    ->paginate(2);
-        }
-        else
-        {
-            $foods =  Food::where('restaurant_id', $restaurant_id)
+        
+        $foods = Food::query();
+        $foods = $foods->filter($request, $restaurant_id)
             ->paginate(2);
-        }
 
         return view('seller.food.index')->with('foods', $foods);
     }
