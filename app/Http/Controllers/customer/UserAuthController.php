@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class UserAuthController extends Controller
 {
     public function register(UserAuthRequest $request)
-    {   
+    {
         $request->validated();
 
         $user = Customer::create([
@@ -34,24 +34,17 @@ class UserAuthController extends Controller
     }
 
     public function login(UserLoginRequest $request)
-    {   
+    {
         $request->validated();
 
         //Check email
         $customer = Customer::where('email', $request->email)->first();
 
         //Check Password
-        if(!$customer && !Hash::check($request->password, $customer->password))
-        {
+        if (!$customer && !Hash::check($request->password, $customer->password)) {
             return response(' اطلاعات وارد شده اشتباه می باشد میباشد', 401);
         }
 
-        // if())
-        // {
-        //     echo $customer->password;
-        //     return response('اطلاعات د', 401);
-        // }
-            
         $token = $customer->createToken('User token')->plainTextToken;
 
         $response = [
@@ -66,6 +59,9 @@ class UserAuthController extends Controller
     {
         auth()->user()->tokens->each->delete();
 
-        return response('شما با موفقیت خارج شدید', 201);
+        return response([
+            'message' => 'شما با موفقیت خارج شدید',
+            'statusCode' => 201
+        ], 201);
     }
 }

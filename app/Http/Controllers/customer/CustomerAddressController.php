@@ -38,7 +38,10 @@ class CustomerAddressController extends Controller
     {
         $customerAddress = CustomerAddress::find($id);
         if (!Gate::allows('customerAddress', $customerAddress)) {
-            return response('آیدی وارد شده آیدی آدرس های شما نیست', 401);
+            return response([
+                'message' => 'آیدی وارد شده آیدی آدرس های شما نیست',
+                'statusCode' => 403
+            ], 403);
         }
 
         return CustomerAddressResource::make($customerAddress);
@@ -50,7 +53,10 @@ class CustomerAddressController extends Controller
 
         $customerAddress = CustomerAddress::find($id);
         if (!Gate::allows('customerAddress', $customerAddress)) {
-            return response('آیدی وارد شده آیدی آدرس های شما نیست', 401);
+            return response([
+                'message' => 'آیدی وارد شده آیدی آدرس های شما نیست',
+                'statusCode' => 403
+            ], 403);
         }
 
         $customerAddress->update([
@@ -60,19 +66,28 @@ class CustomerAddressController extends Controller
             'longitude' => $request->input('longitude'),
         ]);
 
-        return response('با موفقیت تغییر داده شد', 200);
+        return response([
+            'message' => 'با موفقیت تغییر داده شد',
+            'statusCode' => 200
+        ]);
     }
 
     public function destroy($id)
     {
         $customerAddress = CustomerAddress::find($id);
         if (!Gate::allows('customerAddress', $customerAddress)) {
-            return response('آیدی وارد شده آیدی آدرس های شما نیست', 401);
+            return response([
+                'message' => 'آیدی وارد شده آیدی آدرس های شما نیست',
+                'statusCode' => 403
+            ], 403);
         }
-        
+
         //200 or 204?
         CustomerAddress::destroy($id);
-        return response('با موفقیت پاک شد', 200);
+        return response([
+            'message' => 'با موفقیت پاک شد',
+            'statusCode' => 200
+        ], 200);
     }
 
     public function currentAddress($id)
@@ -82,7 +97,10 @@ class CustomerAddressController extends Controller
 
         $customerAddress = CustomerAddress::find($id);
         if (!Gate::allows('customerAddress', $customerAddress)) {
-            return response('آیدی وارد شده آیدی آدرس های شما نیست', 401);
+            return response([
+                'message' => 'آیدی وارد شده آیدی آدرس های شما نیست',
+                'statusCode' => 403
+            ], 403);
         }
 
         $currentAddress = Customer::find($user_id)
@@ -90,7 +108,9 @@ class CustomerAddressController extends Controller
                 "currentAddress" => $customerAddress
             ]);
 
-        return response('آدرس فعلی شما با موفقیت ثبت شد',200);
-        // return CustomerAddressResource::collection(Customer::find($user_id)->currentAddress);
+        return response([
+            'message' => 'آدرس فعلی شما با موفقیت ثبت شد',
+            'statusCode' => 200
+        ]);
     }
 }
