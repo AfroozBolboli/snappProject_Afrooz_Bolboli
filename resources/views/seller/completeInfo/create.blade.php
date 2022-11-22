@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>تکمیل اطلاعات </title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <nav x-data="{ open: false }" class="bg-pink-100 border-b border-gray-100">
-            <!-- Primary Navigation Menu -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex">
-                        <!-- Logo -->
-                        <div class="shrink-0 flex items-center">
-                            <a href="{{ route('dashboard') }}">
-                                <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
-                            </a>
-                        </div>
+    <title>تکمیل اطلاعات </title>
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body class="font-sans antialiased">
+    <nav x-data="{ open: false }" class="bg-pink-100 border-b border-gray-100">
+        <!-- Primary Navigation Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="shrink-0 flex items-center">
+                        <a href="{{ route('dashboard') }}">
+                            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        </a>
+                    </div>
 
                     <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -43,8 +45,7 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
-                                    <x-dropdown-link class="text-right" :href="route('logout')"
-                                            onclick="event.preventDefault();
+                                    <x-dropdown-link class="text-right" :href="route('logout')" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                                         {{ __(' خروج') }}
                                     </x-dropdown-link>
@@ -85,8 +86,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-responsive-nav-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('خروج') }}
                             </x-responsive-nav-link>
@@ -94,101 +94,86 @@
                     </div>
                 </div>
             </div>
-        </nav>
+    </nav>
 
-        <div class="min-h-screen bg-pink-100">
+    <div class="min-h-screen bg-pink-100">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-pink-600 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <!-- Page Heading -->
+        @if (isset($header))
+        <header class="bg-pink-600 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @endif
 
-            <!-- Page Content -->
-            <main>
-                
-                <h2 class="font-semibold text-xl text-white bg-pink-600 p-10 leading-tight text-center">
-                    {{ __('درخواست ورود به پنل رستوراندار یا فروشنده') }}
-                </h2>
+        <!-- Page Content -->
+        <main>
+
+            <h2 class="font-semibold text-xl text-white bg-pink-600 p-10 leading-tight text-center">
+                {{ __('درخواست ورود به پنل رستوراندار یا فروشنده') }}
+            </h2>
 
 
-                <div class="py-12">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-center">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                برای ورود به پنل این اطلاعات را باید کامل کنید
-                            </div>
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-center">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            برای ورود به پنل این اطلاعات را باید کامل کنید
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex justify-center pt-10">
-                <form action="/seller/completeInfo" method="post"s>
+            <div class="flex justify-center pt-10">
+                <form action="/seller/completeInfo" method="post" s>
                     @csrf
                     <div class="block text-center">
 
-                        <input
-                            type="text"
-                            class="block shadow-5xl mb-5 p-2 w-80 italic text-right placeholder-pink-400"
-                            name="name" 
-                            placeholder="نام رستوران">
-                            
-                        <div class="flex justify-center space-x-5 mb-5">  
+                        <input type="text" class="block shadow-5xl mb-5 p-2 w-80 italic text-right placeholder-pink-400" name="name" placeholder="نام رستوران">
+
+                        <div class="flex justify-center space-x-5 mb-5">
                             @foreach($categories as $category)
-                            <input type="checkbox" value="{{$category->title}}" name="categories[]"
-                            class="rounded bg-gray-100 focus:ring-pink-500 text-pink-500" >
+                            <input type="checkbox" value="{{$category->title}}" name="categories[]" class="rounded bg-gray-100 focus:ring-pink-500 text-pink-500">
                             <label>{{$category->title}}</label><br>
                             @endforeach
                         </div>
 
-                        <input
-                            type="text"
-                            class="block shadow-5xl mb-5 p-2 w-80 italic text-right placeholder-pink-400"
-                            name="phone" 
-                            placeholder="شماره تماس">
+                        <input type="text" class="block shadow-5xl mb-5 p-2 w-80 italic text-right placeholder-pink-400" name="phone" placeholder="شماره تماس">
 
                         <label class="text-xl">مختصات جغرافیایی</label><br>
                         <div class="flex row">
                             <div class="col">
-                                <input
-                                    type="text"
-                                    class="block shadow-5xl mb-10 w-20 mx-10 italic text-right placeholder-pink-400"
-                                    name="latitude" 
-                                    placeholder="عرض">
+                                <input type="text" class="block shadow-5xl mb-10 w-20 mx-10 italic text-right placeholder-pink-400" name="latitude" placeholder="عرض">
                             </div>
 
                             <div class="col">
-                                <input
-                                    type="text"
-                                    class="block shadow-5xl mb-10 p-2 w-20 italic text-right placeholder-pink-400"
-                                    name="longitude" 
-                                    placeholder="طول">
+                                <input type="text" class="block shadow-5xl mb-10 p-2 w-20 italic text-right placeholder-pink-400" name="longitude" placeholder="طول">
                             </div>
                         </div>
 
 
-                        <input
-                            type="text"
-                            class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400"
-                            name="address" 
-                            placeholder="آدرس">
-                        
-                        <input
-                            type="text"
-                            class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400"
-                            name="accountNumber" 
-                            placeholder="شماره حساب">
+                        <input type="text" class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400" name="address" placeholder="آدرس">
+
+                        <input type="text" class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400" name="accountNumber" placeholder="شماره حساب">
 
                         <button type="submit" class="bg-pink-600 block shadow-5xl mb-10 p-2 w-80 rounded font-bold text-white">
-                            ثبت و بعدی 
+                            ثبت و بعدی
                         </button>
                     </div>
                 </form>
             </div>
-            </main>
-        </div>
-    </body>
+            @if ($errors->any())
+            <div class="w-4/8 m-auto text-center">
+                @foreach($errors->all() as $error)
+                <li class="text-red-500 list-none">
+                    {{$error}}
+                </li>
+                @endforeach
+            </div>
+            @endif
+        </main>
+    </div>
+</body>
+
 </html>

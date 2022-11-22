@@ -27,6 +27,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('restaurants')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

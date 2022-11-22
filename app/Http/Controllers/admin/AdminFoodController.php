@@ -7,12 +7,14 @@ use App\Http\Requests\admin\AdminFoodStoreRequest;
 use App\Http\Requests\admin\AdminFoodUpdateRequest;
 use App\Models\FoodCategory;
 use App\Models\RestaurantCategory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class AdminFoodController extends Controller
 {
+    use SoftDeletes;
 
     public function index()
     {

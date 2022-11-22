@@ -2,18 +2,17 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Food;
+use App\Models\RestaurantWorkingTime;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RestaurantResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
+
+
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'type' => $this->categories,
@@ -25,9 +24,7 @@ class RestaurantResource extends JsonResource
             'is_open' => $this->status,
             'image' => $this->restaurantPicture,
             // 'score' => $this->score,
-            'workingDay' => $this->workingDay,
-            'openingTime' => $this->openingTime,
-            'closingTime' => $this->closingTime,
+            'schedule' => RestaurantWorkingTimeResource::collection(RestaurantWorkingTime::where('restaurant_id', $this->id)->get())
 
         ];
         return parent::toArray($request);

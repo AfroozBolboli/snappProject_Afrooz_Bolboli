@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('restaurantPicture')->nullable();
 
             $table->bigInteger('phone')->nullable();
-            $table->integer('accountNumber');
+            $table->bigInteger('accountNumber');
             $table->longText('address');
             
-            $table->float('score');
+            $table->float('score')->nullable();
             $table->float('latitude')->nullable();
             $table->float('longitude')->nullable();
             $table->float('shippingCost')->nullable();
@@ -35,9 +35,11 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->boolean('status')->default(0); //if the shop is entirely closed or opem
-            $table->string('workingDay')->nullable();
-            $table->time('openingTime')->nullable();
-            $table->time('closingTime')->nullable();
+            // $table->string('workingDay')->nullable();
+            // $table->time('openingTime')->nullable();
+            // $table->time('closingTime')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

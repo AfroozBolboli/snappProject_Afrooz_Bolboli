@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('price');
             $table->dateTime('startingDate');
             $table->dateTime('endingDate');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
