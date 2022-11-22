@@ -25,9 +25,11 @@ Route::post('/login' , [UserAuthController::class, 'login']);
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout' , [UserAuthController::class, 'logout']);
+    
     Route::resource('/userAddress', CustomerAddressController::class);
     Route::post('/userAddress/currentAddress/{id}' , [CustomerAddressController::class, 'currentAddress']);
     Route::patch('/userAddress/{id}', [CustomerAddressController::class, 'update']);
+
     Route::resource('/restaurants', RestaurantApiController::class);
     Route::get('/restaurants/{restaurant_id}/foods', [RestaurantApiController::class, 'foods']);
 });

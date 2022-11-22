@@ -35,8 +35,6 @@ Route::get('/dashboard', function () {
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-
 Route::group(['middleware' => 'auth'], function(){
     Route::group([
         'prefix' => 'admin',

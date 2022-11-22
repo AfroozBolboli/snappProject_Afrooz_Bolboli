@@ -26,7 +26,6 @@ class AdminBannerController extends Controller
 
     public function store(AdminBannerRequest $request)
     {
-        $request->validated();
 
         $image_path = time() . $request->file('image')->getClientOriginalName();
         $uploadImage = Storage::disk('public')->putFileAs('adminBanner/', $request->file('image'), $image_path);

@@ -16,6 +16,7 @@ use Throwable;
 class SellerAddFoodController extends Controller
 {
     use SoftDeletes;
+    
     public function index()
     {
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first();

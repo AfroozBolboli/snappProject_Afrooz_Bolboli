@@ -41,8 +41,7 @@ class CustomerAddressController extends Controller
             return response('آیدی وارد شده آیدی آدرس های شما نیست', 401);
         }
 
-        $customerAddress = CustomerAddress::where('id', $id)->get();
-        return CustomerAddressResource::collection($customerAddress);
+        return CustomerAddressResource::make($customerAddress);
     }
 
     public function update(StoreUserAddressRequest $request, $id)

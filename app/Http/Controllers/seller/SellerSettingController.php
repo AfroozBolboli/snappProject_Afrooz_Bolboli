@@ -4,6 +4,7 @@ namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\SellerSettingRequest;
+use App\Models\Food;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use App\Models\RestaurantWorkingTime;
@@ -24,6 +25,7 @@ class SellerSettingController extends Controller
 
     public function edit($id)
     {
+
         $restaurant = Restaurant::where('owner_id', auth()->user()->id)->first();
         $categories = RestaurantCategory::all();
         $workingTime = RestaurantWorkingTime::where('restaurant_id', $restaurant->id)->first();
