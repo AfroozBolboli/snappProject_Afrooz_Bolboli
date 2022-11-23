@@ -21,14 +21,4 @@ class StoreUserAddressRequest extends FormRequest
             'longitude' => 'required|numeric'
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'باید عنوان این آدرس را وارد کنید',
-            'address.required' => 'باید آدرس را وارد کنید',
-            'latitude.required' => 'باید عرض جغرافیایی را وارد کنید',
-            'longitude.required' => 'باید طول جغرافیایی را وارد کنید',
-        ];
-    }
 }

@@ -27,7 +27,7 @@ class AdminFoodpartRequest extends FormRequest
             'food_id.required' => 'باید آیدی غذا را وارد کنید',
             'discount.required' => 'باید میزان تخفیف را وارد کنید',
             'date.required' => 'باید روز را وارد کنید',
-            'time.required' => 'باید زمات را انتخاب کنید',          
+            'time.required' => 'باید زمان را انتخاب کنید',          
         ];
     }
 }
