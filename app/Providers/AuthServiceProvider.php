@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Customer;
 use App\Models\CustomerAddress;
+use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\User;
 use App\Policies\CustomerAddressPolicy;
@@ -26,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         // });
 
         Gate::define(('customerAddress'), fn(Customer $customer, CustomerAddress $customerAddress) => $customerAddress->user_id == $customer->id);
+        Gate::define(('customercart'), fn(Customer $customer, Order $order) => $order->customer_id == $customer->id);
         Gate::define(('isAdmin'), fn(User $user) => $user->role == 1);
         //Gate::define(('retaurantOwner'), fn(User $user, Restaurant $restaurant) => $restaurant->owner_id == $user->id);
     }
