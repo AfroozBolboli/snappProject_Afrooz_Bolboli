@@ -25,7 +25,6 @@ class SellerSettingController extends Controller
 
     public function edit($id)
     {
-
         $restaurant = Restaurant::where('owner_id', auth()->user()->id)->first();
         $categories = RestaurantCategory::all();
         $workingTime = RestaurantWorkingTime::where('restaurant_id', $restaurant->id)->first();

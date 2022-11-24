@@ -16,7 +16,7 @@
                         {{ __('غذاهای ساخته شده') }}
                     </x-nav-link>
 
-                    <x-nav-link class="text-lg font-bold" :href="route('seller.completeInfo.create')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="text-lg font-bold" :href="route('seller.orderStatus.index')" :active="request()->routeIs('dashboard')">
                         {{ __('وضعیت سفارش') }}
                     </x-nav-link>
 

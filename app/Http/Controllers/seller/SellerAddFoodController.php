@@ -11,7 +11,7 @@ use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Throwable;
+use Illuminate\Support\Facades\Gate;
 
 class SellerAddFoodController extends Controller
 {
@@ -39,8 +39,6 @@ class SellerAddFoodController extends Controller
 
     public function store(SellerAddFoodRequest $request)
     {
-        $request->validated();
-
         if(!empty($request->image))
         {       
             $image_path = time().$request->file('image')->getClientOriginalName();
@@ -68,8 +66,14 @@ class SellerAddFoodController extends Controller
 
     public function edit($id)
     {
-        $restaurant_name = Restaurant::where('owner_id', auth()->user()->id)->first()->name;
-        $discounts = Discount::where('restaurant_name', $restaurant_name)->get();
+        $restaurant = Restaurant::where('owner_id', auth()->user()->id)->first();
+        
+        $restaurant_auth = Food::find($id)->restaurant_id;
+        if ($restaurant == null || $restaurant_auth != $restaurant->id) {
+            abort(403);
+        }
+
+        $discounts = Discount::where('restaurant_name', $restaurant->name)->get();
         $food = Food::find($id);        
         $categories = FoodCategory::all();
         return view('seller/food/edit',[
@@ -81,8 +85,6 @@ class SellerAddFoodController extends Controller
 
     public function update(SellerAddFoodRequest $request, $id)
     {
-        $request->validated();
-
         if(!empty($request->image))
         {       
             $image_path = time().$request->file('image')->getClientOriginalName();

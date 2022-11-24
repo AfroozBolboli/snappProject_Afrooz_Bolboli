@@ -10,10 +10,10 @@ class RestaurantPolicy
 {
     use HandlesAuthorization;
 
-    private $id;
-    public function __construct($id)
+
+    public function __construct()
     {
-        $this->id = $id;
+
     }
 
     public function index($owner_id)

@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AdminFoodpartyController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
+use App\Http\Controllers\seller\SellerOrderStatus;
 use App\Http\Controllers\seller\SellerSettingController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -62,15 +63,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/food', SellerAddFoodController::class);
         Route::post('/food/filter', [SellerAddFoodController::class, 'filter']);
         Route::resource('/setting', SellerSettingController::class);
+
+        Route::resource('/orderStatus', SellerOrderStatus::class);
+        Route::get('/orderStatus/archive/all', [SellerOrderStatus::class, 'archive']);
     });
 
-    // Route::group([
-    //     'prefix' => 'customer',
-    //     'middleware' => 'isCustomer',
-    //     'as' => 'customer.'
-    // ], function(){
-    //     Route::get('customerEx', [customerOnly::class, 'index']);
-    // });
 });
 
 require __DIR__.'/auth.php';
