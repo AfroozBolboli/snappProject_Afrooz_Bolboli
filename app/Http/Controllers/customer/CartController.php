@@ -9,6 +9,7 @@ use App\Http\Resources\CartResource;
 use App\Models\Food;
 use App\Models\Order;
 use App\Models\OrderFood;
+use App\Notifications\CartPaid;
 use Illuminate\Support\Facades\Gate;
 
 class CartController extends Controller
@@ -27,11 +28,10 @@ class CartController extends Controller
         $restaurant_id = $food->restaurant_id;
         $customerOrder = Order::where('restaurant_id', $restaurant_id)
             ->where('customer_id', $customer_id)
+            ->where('status', 0)
             ->first();
 
-        if ($customerOrder == null || $customerOrder->status != 0) {
-
-
+        if ($customerOrder == null) {
             $order = Order::create([
                 'customer_id' => $customer_id,
                 'restaurant_id' => $restaurant_id,
@@ -43,12 +43,7 @@ class CartController extends Controller
 
             $order_id = $order->id;
         } else {
-
-            $order = Order::where('customer_id', $customer_id)
-                ->where('restaurant_id', $restaurant_id)
-                ->first();
-
-            $order_id = $order->id;
+            $order_id = $customerOrder->id;
         }
 
         $RFood = OrderFood::where('food_id', $request->input('food_id'))->where('order_id', $order_id)->first();
@@ -126,13 +121,16 @@ class CartController extends Controller
 
         if ($order == null || !Gate::allows('customercart', $order)) {
             return response([
-                'message' => 'آیدی وارد شده آیدی سبد خرید شما نیست',
+                'message' => 'آیدی وارد شده آیدی سبد خریدفعال شما نیست',
             ], 403);
         }
 
         $order->update([
             'status' => 1,
         ]);
+        
+        $amount = OrderFood::where('order_id', $order->id)->sum('price');
+        auth()->user()->notify(new CartPaid($amount));
 
         return response([
             'message' => "سبد خرید $order->id با موفقیت پرداخت شد"

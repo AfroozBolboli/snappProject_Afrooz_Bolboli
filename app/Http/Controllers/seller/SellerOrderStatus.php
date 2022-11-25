@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\Restaurant;
+use App\Notifications\CartStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,7 +32,7 @@ class SellerOrderStatus extends Controller
         $order = Order::find($id);
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first()->id;
 
-        if ($order == null || $restaurant_id != $order->id) {
+        if ($order == null || $restaurant_id != $order->restaurant_id) {
             abort(403);
         }
 
@@ -48,6 +49,11 @@ class SellerOrderStatus extends Controller
             'status' =>  $request->input('status'),
         ]);
 
+
+        $previousStatus = OrderStatus::where('status', $order->status - 1)->first()->title;
+        $currrentStatus = OrderStatus::where('status', $order->status)->first()->title;
+
+        auth()->user()->notify(new CartStatus($previousStatus, $currrentStatus));
         return redirect('seller/orderStatus');
         
     }
