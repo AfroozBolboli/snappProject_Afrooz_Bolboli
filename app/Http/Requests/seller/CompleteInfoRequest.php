@@ -39,8 +39,8 @@ class CompleteInfoRequest extends FormRequest
             'name.required' => 'باید اسم رستوران را وارد کنید',
             'phone.required' => 'باید شماره تماس رستوران را وارد کنید',     
             'address.required' => 'باید آدرس را وارد کنید', 
-            'address.required' => 'باید عرض جغرافیایی را وارد کنید', 
-            'address.required' => 'باید طول جغرافیایی را وارد کنید', 
+            'latitude.required' => 'باید عرض جغرافیایی را وارد کنید', 
+            'longitude.required' => 'باید طول جغرافیایی را وارد کنید', 
             'accountNumber.required' => 'باید شماره حساب رستوران کنید',          
         ];
     }

@@ -30,14 +30,4 @@ class SellerAddFoodRequest extends FormRequest
             'category' => 'required',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'باید اسم غذا را وارد کنید',
-            'image.required' => 'باید عکس غذا را وارد کنید',     
-            'price.required' => 'باید قیمت غذا را وارد کنید', 
-            'category.required' => 'باید دسته بندی غذا را وارد کنید',         
-        ];
-    }
 }

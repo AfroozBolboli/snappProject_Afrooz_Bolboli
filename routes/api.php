@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\CustomerAddressController;
 use App\Http\Controllers\customer\RestaurantApiController;
 use App\Http\Controllers\customer\UserAuthController;
@@ -32,6 +33,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('/restaurants', RestaurantApiController::class);
     Route::get('/restaurants/{restaurant_id}/foods', [RestaurantApiController::class, 'foods']);
+
+    Route::get('/carts', [CartController::class, 'index']);
+    Route::get('/carts/{cart_id}', [CartController::class, 'show']);
+    Route::post('/carts/add', [CartController::class, 'store']);
+    Route::patch('/carts/add', [CartController::class, 'update']);
+    Route::post('/carts/{id}/pay', [CartController::class, 'pay']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

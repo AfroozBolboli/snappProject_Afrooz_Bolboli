@@ -24,11 +24,4 @@ class UserLoginRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'email.required' => 'باید ایمیل خود را وارد کنید',
-            'password.required' => 'باید رمز خود را وارد کنید',     
-        ];
-    }
 }

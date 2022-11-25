@@ -14,15 +14,13 @@ class CustomerAddressController extends Controller
 {
     public function index()
     {
-        $user = auth()->user()->id;
+        $user_id = auth()->user()->id;
         return
-            CustomerAddressResource::collection(CustomerAddress::where('user_id', $user)->get());
+            CustomerAddressResource::collection(CustomerAddress::where('user_id', $user_id)->get());
     }
 
     public function store(StoreUserAddressRequest $request)
     {
-        $request->validated();
-
         $address = CustomerAddress::create([
             'title' => $request->input('title'),
             'address' => $request->input('address'),
@@ -49,7 +47,6 @@ class CustomerAddressController extends Controller
 
     public function update(StoreUserAddressRequest $request, $id)
     {
-        $request->validated();
 
         $customerAddress = CustomerAddress::find($id);
         if (!Gate::allows('customerAddress', $customerAddress)) {

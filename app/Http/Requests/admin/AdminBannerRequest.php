@@ -29,13 +29,4 @@ class AdminBannerRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'title.required' => 'باید تیتر را وارد کنید',
-            'image.required' => 'باید عکس را آپلود کنید',     
-            'image.mimes' => 'فورمت قابل قبول jpg,png,jpeg',     
-            'image.max' => 'حجم باید کمتر از ۵۰۴۸ کیلوبایت باشد',     
-        ];
-    }
 }
