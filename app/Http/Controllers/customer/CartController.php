@@ -7,6 +7,7 @@ use App\Http\Requests\customer\CartRequest;
 use App\Http\Requests\customer\CartUpdateRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Food;
+use App\Models\Foodparty;
 use App\Models\Order;
 use App\Models\OrderFood;
 use App\Notifications\CartPaid;
@@ -119,7 +120,7 @@ class CartController extends Controller
     {
         $order = Order::find($id);
 
-        if ($order == null || !Gate::allows('customercart', $order)) {
+        if ($order == null || !Gate::allows('customercart', $order) || $order->status != 0) {
             return response([
                 'message' => 'آیدی وارد شده آیدی سبد خریدفعال شما نیست',
             ], 403);

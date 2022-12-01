@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('/restaurants', RestaurantApiController::class);
     Route::get('/restaurants/{restaurant_id}/foods', [RestaurantApiController::class, 'foods']);
+    Route::get('/restaurants/feat/{isOpen?}', [RestaurantApiController::class, 'isOpen']);
+    Route::get('/restaurants/feat/{type?}', [RestaurantApiController::class, 'type']);
+    Route::get('/restaurants/feat/{score_gt?}', [RestaurantApiController::class, 'score']);
 
     Route::get('/carts', [CartController::class, 'index']);
     Route::get('/carts/{cart_id}', [CartController::class, 'show']);

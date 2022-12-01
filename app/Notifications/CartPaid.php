@@ -31,11 +31,4 @@ class CartPaid extends Notification implements ShouldQueue
             ->action('دیدن فاکتور', '#')
             ->line('از خرید از رستوران ما متشکریم');
     }
-
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

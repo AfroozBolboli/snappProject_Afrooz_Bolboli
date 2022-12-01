@@ -32,7 +32,7 @@
     
         <div class="float">
             <a href="food/create"
-                class="italic text-xl bold text-pink-600 ">
+                class="italic text-xl bold text-pink-600 float-right">
                 اضافه کردن غذای جدید &rarr;
             </a>
         </div>
@@ -40,7 +40,7 @@
         <div class="w-5/6 py-10">
             @foreach($foods as $food)
                 <div class="m-auto py-6 divide-black">
-                    <div class="float-right">
+                    <div class="float-left">
                         <a 
                             class="pb-2 italic text-green-600"
                             href="food/{{$food->id}}/edit">ویرایش &rarr;</a>

@@ -16,7 +16,7 @@ class SellerOrderStatus extends Controller
     public function index()
     {
         $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first()->id;
-        $orders = Order::where('restaurant_id', $restaurant_id )->where('status', '!=', 4)->get();
+        $orders = Order::where('restaurant_id', $restaurant_id )->where('status', '!=', 4)->where('status','!=', 0)->get();
 
         $orderStatus = OrderStatus::all();
         return view('seller.orderStatus.index',[

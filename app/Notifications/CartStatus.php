@@ -27,7 +27,6 @@ class CartStatus extends Notification implements ShouldQueue
 
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
             ->greeting('باسلام')
             ->line("خرید شما از حالت $this->previousStatus خارج و هم اکنون وارد حالت $this->currrentStatus شده است")

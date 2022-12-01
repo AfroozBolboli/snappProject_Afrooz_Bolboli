@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
 use App\Http\Controllers\seller\SellerOrderStatus;
+use App\Http\Controllers\seller\SellerReportsController;
 use App\Http\Controllers\seller\SellerSettingController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +67,11 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::resource('/orderStatus', SellerOrderStatus::class);
         Route::get('/orderStatus/archive/all', [SellerOrderStatus::class, 'archive']);
+
+        // Route::resource('/reports', SellerReportsController::class);
+        Route::get('/reports', [SellerReportsController::class, 'index'])->name('reports.index');
+        Route::post('/reports/filter', [SellerReportsController::class, 'filter']);
+
     });
 
 });

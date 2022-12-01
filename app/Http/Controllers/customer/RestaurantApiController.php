@@ -38,4 +38,19 @@ class RestaurantApiController extends Controller
 
     }
 
+    public function isOpen()
+    {
+        return ['Restaurants' => RestaurantResource::collection(Restaurant::where('status', 1)->get())];
+    }
+
+    public function type($value)
+    {
+        return ['Restaurants' => RestaurantResource::collection(Restaurant::where('categories', $value)->get())];
+    }
+
+    public function score($value)
+    {
+        return ['Restaurants' => RestaurantResource::collection(Restaurant::where('score', $value)->get())];
+    }
+
 }

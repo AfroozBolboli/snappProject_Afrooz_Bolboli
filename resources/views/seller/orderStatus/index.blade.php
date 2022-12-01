@@ -6,30 +6,29 @@
     </x-slot>
 
     <div class="m-auto w-4/5 py-12">
-        <a href="orderStatus/archive/all" class="italic text-xl bold text-pink-600 ">
+        <a href="orderStatus/archive/all" class="italic text-xl bold text-pink-600 float-right">
             آرشیو سفارشات &rarr;
         </a>
         <div class="w-5/6 py-10">
             @foreach($orders as $order)
             <div class="m-auto py-6 divide-black">
-                <div class="float-right">
+                <div class="float-left">
                     <a class="pb-2 italic text-green-600" href="orderStatus/{{$order->id}}/edit">ویرایش &rarr;</a>
-
                 </div>
                 <div class="flex justify-center space-x-16 font-bold text-xl text-pink-600">
 
                     <span>
-                        آیدی سفارش: {{$order->id}}
-                    </span>
-                    <span>
-                        آیدی مشتری: {{$order->customer_id}}
+                        وضعیت سفارش: {{ $orderStatus[$order->status]->title }}
                     </span>
                     <span>
                         کد پیگیری: <br>
                         {{$order->trackingCode}}
                     </span>
                     <span>
-                        وضعیت سفارش: {{ $orderStatus[$order->status]->title }}
+                        آیدی سفارش: {{$order->id}}
+                    </span>
+                    <span>
+                        آیدی مشتری: {{$order->customer_id}}
                     </span>
 
                 </div>

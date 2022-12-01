@@ -13,18 +13,18 @@
                 
                 <div class="flex justify-center space-x-16 font-bold text-xl text-pink-600">
 
+                <span>
+                        وضعیت سفارش: {{ $orderStatus[$order->status]->title }}
+                    </span>
+                    <span>
+                        کد پیگیری: <br>
+                        {{$order->trackingCode}}
+                    </span>
                     <span>
                         آیدی سفارش: {{$order->id}}
                     </span>
                     <span>
                         آیدی مشتری: {{$order->customer_id}}
-                    </span>
-                    <span>
-                        کد پیگیری: <br>
-                         {{strrev($order->trackingCode)}}
-                    </span>
-                    <span>
-                        وضعیت سفارش: {{ $orderStatus[$order->status]->title }}
                     </span>
 
                 </div>

@@ -32,14 +32,4 @@ class AdminDiscountRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'title.required' => 'باید تیتر را وارد کنید',
-            'restaurant_name.required' => 'باید اسم رستوران را وارد کنید',     
-            'price.required' => 'باید قیمت را وارد کنید',     
-            'startingDate.required' => 'باید تاریخ شروع را انتخاب کنید',     
-            'endingDate.required' => 'باید تاریخ اتمام را انتخاب کنید',       
-        ];
-    }
 }
