@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrderFood extends Model
+class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'order_id', 'food_id',
-        'count', 'price',
+        'order_id', 'score',
+        'comment', 'reply',
+        'sellerPermission', 'adminPermission',
     ];
 
     public function order()

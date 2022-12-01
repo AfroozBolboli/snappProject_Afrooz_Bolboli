@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\CustomerAddressController;
+use App\Http\Controllers\customer\CustomerCommentController;
 use App\Http\Controllers\customer\RestaurantApiController;
 use App\Http\Controllers\customer\UserAuthController;
 use Illuminate\Http\Request;
@@ -42,6 +43,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/carts/add', [CartController::class, 'store']);
     Route::patch('/carts/add', [CartController::class, 'update']);
     Route::post('/carts/{id}/pay', [CartController::class, 'pay']);
+
+    Route::get('/comments', [CustomerCommentController::class, 'index']);
+    Route::post('/comments', [CustomerCommentController::class, 'store']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

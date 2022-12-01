@@ -27,7 +27,7 @@ return [
     'between' => [
         'array' => 'The :attribute must have between :min and :max items.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
-        'numeric' => 'The :attribute must be between :min and :max.',
+        'numeric' => ':attribute باید بین :min و :max باشد',
         'string' => 'The :attribute must be between :min and :max characters.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
@@ -40,7 +40,7 @@ return [
     'declined_if' => 'The :attribute must be declined when :other is :value.',
     'different' => 'The :attribute and :other must be different.',
     'digits' => ':attribute باید ارقام :digits باشد',
-    'digits_between' => 'The :attribute must be between :min and :max digits.',
+    'digits_between' => ':attribute باید بین :min و :max باشد',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'doesnt_end_with' => 'The :attribute may not end with one of the following: :values.',
@@ -119,12 +119,13 @@ return [
     'regex' => 'The :attribute format is invalid.',
     'required' => ':attribute را باید پر کنید',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
-    'required_if' => 'The :attribute field is required when :other is :value.',
+    'required_if' => ':attribute باید پر شود وقتی :other مقدار :value دارد  
+    The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',
-    'required_without' => 'The :attribute field is required when :values is not present.',
+    'required_without' => 'اگر :attribute را وارد نمی کنید باید :values را وارد کنید',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
     'same' => 'The :attribute and :other must match.',
     'size' => [
@@ -195,7 +196,12 @@ return [
         'status' => 'وضعیت رستوران',
         'count' => 'تعداد',
         'trackingCode' => 'کدپیگیری',
-        '' => ''
+        'null' => 'خالی',
+        'order_id' => 'آیدی سبد خرید',
+        'score' => 'امتیاز',
+        'comment' => 'پیام نظر',
+        'restaurant_id' => 'آیدی رستوران',
+        '' => '',
     ],
 
 ];
