@@ -22,7 +22,7 @@ class CommentController extends Controller
                 $comments[] = Comment::where('order_id', $order->id)->first();
         }
         return view('seller.comments.index', [
-            'comments' => $comments
+            'comments' => array_reverse($comments)
         ]);
     }
 

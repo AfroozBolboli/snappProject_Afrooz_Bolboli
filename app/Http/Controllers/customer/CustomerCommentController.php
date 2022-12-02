@@ -5,6 +5,7 @@ namespace App\Http\Controllers\customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\customer\CommentRequest;
 use App\Http\Requests\customer\PostCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Order;
 use App\Models\OrderFood;
@@ -39,7 +40,7 @@ class CustomerCommentController extends Controller
                 }
             }
 
-            return $comments;
+            return ['comments' => CommentResource::collection($comments)];
         }elseif ($request->input('food_id')) 
         {
 
