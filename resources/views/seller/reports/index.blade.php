@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="m-auto w-11/12 py-6">
-        <div class="flex justify-center">
+        <div class="flex justify-center space-x-64 ">
             <form action="{{url('seller/reports/filter')}}" method="post">
                 @csrf
                 <div class=" m-8 mx-auto form-control text-right">
@@ -15,8 +15,17 @@
                         <option value="week">براساس هفته</option>
                         <option value="month">بر اساس ماه</option>
                     </select>
-                    <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-3/4 font-bold text-white">
+                    <button type="submit" class="rounded bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-3/4 font-bold text-white">
                         جست و جو
+                    </button>
+                </div>
+            </form>
+
+            <form action="{{url('seller/reports/excel')}}" method="post">
+                @csrf
+                <div class=" m-8 mx-auto form-control text-right">
+                    <button type="submit" class="bg-green-700 rounded block mx-auto shadow-5xl mb-10 p-1 w-3/4 font-bold text-white">
+                        گرفتن اکسل
                     </button>
                 </div>
             </form>

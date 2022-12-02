@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\seller;
 
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderFood;
 use App\Models\OrderStatus;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SellerReportsController extends Controller
 {
@@ -75,12 +77,18 @@ class SellerReportsController extends Controller
 
         }
 
-
         return view('seller.reports.index',[
             'orders' => $orders,
             'orderStatus' => $orderStatus,
             'totalOrders' => $totalOrders,
             'totalIncome' => $totalIncome
         ]);
+    }
+
+    public function excel()
+    {
+        $restaurant_id = Restaurant::where('owner_id', auth()->user()->id)->first()->id;
+
+        return Excel::download(new OrdersExport($restaurant_id), 'orders.xlsx');
     }
 }

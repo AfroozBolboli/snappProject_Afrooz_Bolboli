@@ -73,6 +73,7 @@ Route::group(['middleware' => 'auth'], function(){
         // Route::resource('/reports', SellerReportsController::class);
         Route::get('/reports', [SellerReportsController::class, 'index'])->name('reports.index');
         Route::post('/reports/filter', [SellerReportsController::class, 'filter']);
+        Route::post('/reports/excel', [SellerReportsController::class, 'excel']);
 
         Route::resource('/comments', CommentController::class);
         Route::post('/comments/filter', [CommentController::class, 'filter']);
