@@ -4,7 +4,9 @@ namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Food;
 use App\Models\Order;
+use App\Models\OrderFood;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -50,7 +52,42 @@ class CommentController extends Controller
             'reply' => $request->input('reply')
         ]);
 
-
         return redirect('seller/comments');
+    }
+
+    public function filter(Request $request)
+    {
+        $food = $request->input('commentFilter');
+
+        //if a food with this name doesn't exist return
+        if(Food::where('name', $food)->first() == null)
+        {
+            $comments = null;
+            return view('seller.comments.index', [
+                'comments' => $comments
+            ]);
+        }
+
+        $food_id = Food::where('name', $food)->first()->id;
+        $order_foods = OrderFood::where('food_id', $food_id)->get();
+        $order_ids = null;
+        foreach($order_foods as $order_food)
+        {
+            $order_id = $order_food->order_id;
+            if($order_id)
+                $order_ids[] = $order_food->order_id;
+        }
+
+        $comments = null;
+        foreach($order_ids as $order_id)
+        {
+            $comment = Comment::where('order_id', $order_id)->first();
+            if($comment)
+                $comments[]=$comment;
+        }
+
+        return view('seller.comments.index', [
+            'comments' => $comments
+        ]);
     }
 }

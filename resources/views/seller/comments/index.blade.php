@@ -11,7 +11,7 @@
                 @csrf
                 <div class=" m-4 mx-10 form-control text-right">
                     <label>فیلتر براساس غذا</label><br>
-                    <input type="search" name='categoryFilter' class="m-3">
+                    <input type="search" name='commentFilter' class="m-3">
                     <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
                         جست و جو
                     </button>
