@@ -18,7 +18,7 @@
 
                     <input type="text" class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400" name="restaurantCategory" placeholder="در کدام دسته بندی رستوران؟ ">
 
-                    <button type="submit" class="bg-pink-500 block shadow-5xl mb-10 p-2 w-80 rounded font-bold text-white">
+                    <button type="submit" class="bg-pink-500 block rounded shadow-5xl mb-10 p-2 w-80 rounded font-bold text-white">
                         ثبت
                     </button>
 

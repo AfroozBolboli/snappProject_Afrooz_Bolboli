@@ -43,7 +43,7 @@
                         <label>اضافه کردن به فودپارتی</label><br>
                     </div>
 
-                    <button type="submit" class="bg-pink-600 block shadow-5xl mb-10 p-2 w-80 uppercase font-bold text-white">
+                    <button type="submit" class="bg-pink-600 rounded block shadow-5xl mb-10 p-2 w-80 uppercase font-bold text-white">
                         ثبت
                     </button>
                 </div>

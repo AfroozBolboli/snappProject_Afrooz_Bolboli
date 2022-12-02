@@ -16,7 +16,7 @@
                     <label class="text-2xl bold text-center">عکس این دسته بندی</label>
                     <input type="file" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-pink-400" name="image">
 
-                    <button type="submit" class="bg-pink-500 block shadow-5xl mb-10 p-2 w-80 uppercase font-bold text-white">
+                    <button type="submit" class="bg-pink-500 rounded block shadow-5xl mb-10 p-2 w-80 uppercase font-bold text-white">
                         ثبت
                     </button>
 

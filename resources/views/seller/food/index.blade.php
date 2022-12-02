@@ -10,7 +10,7 @@
             <div class=" m-4 mx-auto form-control text-right">
                 <label>فیلتر نام غذا</label><br>
                 <input type="search" name = 'foodFilter' class="m-3">
-                <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
+                <button type="submit" class="bg-gray-800 block rounded mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
                     جست و جو 
                 </button>
             </div>
@@ -21,7 +21,7 @@
             <div class=" m-4 mx-10 form-control text-right">
                 <label>فیلتر دسته بندی غذا</label><br>
                 <input type="search" name = 'categoryFilter' class="m-3">
-                <button type="submit" class="bg-gray-800 block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
+                <button type="submit" class="bg-gray-800 rounded block mx-auto shadow-5xl mb-10 p-1 w-2/4 font-bold text-white">
                     جست و جو 
                 </button>
             </div>

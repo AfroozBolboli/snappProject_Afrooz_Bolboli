@@ -24,7 +24,7 @@
                 </select>
 
                 <div class="flex justify-center">
-                    <button type="submit" class="bg-pink-500 block shadow-5xl my-5 p-2 w-80 font-bold text-white">
+                    <button type="submit" class="bg-pink-500 rounded block shadow-5xl my-5 p-2 w-80 font-bold text-white">
                         ثبت
                     </button>
                 </div>

@@ -157,7 +157,7 @@
 
                         <input type="text" class="block shadow-5xl mb-10 p-2 w-80 italic text-right placeholder-pink-400" name="accountNumber" placeholder="شماره حساب">
 
-                        <button type="submit" class="bg-pink-600 block shadow-5xl mb-10 p-2 w-80 rounded font-bold text-white">
+                        <button type="submit" class="bg-pink-600 rounded block shadow-5xl mb-10 p-2 w-80 rounded font-bold text-white">
                             ثبت و بعدی
                         </button>
                     </div>

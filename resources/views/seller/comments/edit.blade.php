@@ -44,7 +44,7 @@
             <textarea name="reply" rows="4" class=" my-5 text-center rounded bg-pink-300" placeholder="نظر خود را اینجا بنویسید"></textarea>
         </div>
         <div class="flex justify-center">
-            <button type="submit" class="bg-pink-500 block shadow-5xl mb-10 p-2 w-80 font-bold text-white">
+            <button type="submit" class="bg-pink-500 rounded block shadow-5xl mb-10 p-2 w-80 font-bold text-white">
                 ثبت
             </button>
         </div>
