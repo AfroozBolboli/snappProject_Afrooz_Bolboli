@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\AdminBannerController;
+use App\Http\Controllers\admin\AdminCommentController;
 use App\Http\Controllers\admin\AdminDiscountController;
 use App\Http\Controllers\admin\AdminFoodController;
 use App\Http\Controllers\admin\AdminFoodpartyController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
+use App\Http\Controllers\seller\CommentController;
 use App\Http\Controllers\seller\CompleteInfoController;
 use App\Http\Controllers\seller\SellerAddFoodController;
 use App\Http\Controllers\seller\SellerOrderStatus;
@@ -49,7 +51,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/discount', AdminDiscountController::class);
         Route::get('/foodparty/foodlist/all', [AdminFoodpartyController::class, 'foodlist']);
         Route::resource('/foodparty', AdminFoodpartyController::class);
-
+        Route::resource('/comments', AdminCommentController::class);
     });
 
     Route::group([
@@ -71,6 +73,9 @@ Route::group(['middleware' => 'auth'], function(){
         // Route::resource('/reports', SellerReportsController::class);
         Route::get('/reports', [SellerReportsController::class, 'index'])->name('reports.index');
         Route::post('/reports/filter', [SellerReportsController::class, 'filter']);
+
+        Route::resource('/comments', CommentController::class);
+        Route::post('/comments/filter', [CommentController::class, 'filter']);
 
     });
 

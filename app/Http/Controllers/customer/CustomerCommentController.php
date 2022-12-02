@@ -28,7 +28,16 @@ class CustomerCommentController extends Controller
             $comments = null;
 
             foreach ($orders as $order) 
-                $comments[] = Comment::where('order_id', $order->id)->first();
+            {
+                $comment = Comment::where('order_id', $order->id)->first();
+                if($comment)
+                {
+                    if($comment->sellerPermission)
+                        $comments[] = $comment;
+                    elseif($comment->adminPermission)
+                        $comments[] = $comment;
+                }
+            }
 
             return $comments;
         }elseif ($request->input('food_id')) 
@@ -50,8 +59,15 @@ class CustomerCommentController extends Controller
 
             foreach ($orders as $order) {
                 $comment = Comment::where('order_id', $order->id)->first();
+
                 if($comment)
-                    $comments[] = $comment;
+                {
+                    if($comment->sellerPermission)
+                        $comments[] = $comment;
+                    elseif($comment->adminPermission)
+                        $comments[] = $comment;
+                }
+
             }
 
             return $comments;
@@ -83,6 +99,8 @@ class CustomerCommentController extends Controller
             'comment' => $request->input('comment'),
         ]);
 
-        return $comment;
+        return response([
+            'message' => 'نظر شما با موفقیت ثبت شد'
+        ],200);
     }
 }

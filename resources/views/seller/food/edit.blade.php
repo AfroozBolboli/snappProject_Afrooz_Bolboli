@@ -1,12 +1,17 @@
 <x-SellerApp-layout>
-    <div class="m-auto w-4/8 py-24">
+    <x-slot name="header">
+        <h2 class="text-3xl bold text-white leading-tight text-center">
+            {{ __(' غذا ها ') }}
+        </h2>
+    </x-slot>
+    <div class="m-auto w-4/8 py-10">
         <div class="text-center">
             <h1 class="text-5xl bold">
                 تغییر غذا
             </h1>
         </div>
 
-        <div class="flex justify-center pt-20">
+        <div class="flex justify-center pt-10">
             <form action="/seller/food/{{$food->id}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -32,8 +37,6 @@
                             <label>{{$category->title}}</label><br>
                         </div>
                         @endforeach
-
-
                     </div>
 
                     <input type="text" class="block shadow-5xl my-5 p-2 w-80 italic text-right placeholder-pink-400" name="ingredient" value="{{$food->ingredient}}" placeholder="مواد تشکیل دهنده ی غذا">
